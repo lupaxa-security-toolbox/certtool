@@ -1,7 +1,6 @@
 ###############################################################################
-# LUPAXA PARANOID .gitignore
-# Prevent ALL secrets, certificates, caches, local configs, logs, temp files,
-# IDE project junk, and machine-specific artefacts from ever being committed.
+# LUPAXA STANDARD .gitignore
+# Sensible defaults for Python + tooling + docs, without being over the top.
 ###############################################################################
 
 ###############################################################################
@@ -34,7 +33,7 @@ venv/
 env/
 ENV/
 .conda/
-.python-version  # pyenv local version file
+.python-version  # pyenv / asdf local version file
 
 ###############################################################################
 # Hatch, Poetry, Pipenv, PDM, Rye, etc.
@@ -44,31 +43,26 @@ ENV/
 pipenv-files/
 pdm.lock
 pdm.toml
-package-lock.json
 rye.lock
 
 ###############################################################################
 # Secrets, credentials, tokens, auth files
 ###############################################################################
+# Keep this focused so we don’t explode on every directory name.
+*.env
+*.env.*
+.envrc
 *.secret
 *.secrets
 *.credentials
-*.token
 *.tokens
-*.auth
-*.env
-*.env.*             # .env.dev, .env.local, etc.
-.envrc              # direnv
-.secrets.*          # secrets.yaml/json/etc
-*secrets*/          # any directory containing secrets
-*token*/            # any directory containing tokens
 vault.json
 *.gpg
 *.asc
 *.pgp
 
 ###############################################################################
-# CertificateTool sensitive outputs (PARANOID)
+# Certificate / key outputs (runtime artefacts, not source)
 ###############################################################################
 *.pem
 *.der
@@ -77,18 +71,14 @@ vault.json
 *.crt
 *.pfx
 *.cer
+*.jwk
+*.keystore
 
+# Common output dirs for generated certs/keys
 certs*/
 keys*/
 output*/
 generated*/
-*.jwk
-*.keystore
-
-# ANYTHING containing "cert" or "key" in name is banned.
-*cert*/
-*key*/
-*keystore*/
 
 ###############################################################################
 # Logs, dumps, traces
@@ -121,14 +111,15 @@ htmlcov/
 .ruff_cache/
 .mypy_cache/
 .pytest_cache/
-.tox/
-.nox/
 .cache/
 pytestdebug.log
 pip-log.txt
 
+# Temporary audit venv used by Makefile
+.audit-env/
+
 ###############################################################################
-# Documentation — MkDocs, Sphinx, pdoc, etc.
+# Documentation — MkDocs, Sphinx, etc.
 ###############################################################################
 # MkDocs static site output
 site/
@@ -155,7 +146,7 @@ docs/.benchmarks/
 *.sublime-project
 *.sublime-workspace
 
-# Other IDEs
+# Other editors
 *.swp
 *.swo
 

@@ -1,0 +1,42 @@
+name: Publish to TestPyPI
+
+on:
+  push:
+    tags:
+      - 'v[0-9].[0-9]+.[0-9]+rc[0-9]+'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write  # REQUIRED for trusted publishing
+
+jobs:
+  build-and-publish:
+    name: Build and upload to TestPyPI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install build backend (hatch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install hatch
+
+      - name: Build distribution (sdist + wheel)
+        run: |
+          hatch build
+
+      # Trusted publishing to TestPyPI
+      # Make sure you have added this GitHub repo as a "Trusted Publisher"
+      # in your TestPyPI project settings.
+      - name: Publish to TestPyPI via trusted publisher
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

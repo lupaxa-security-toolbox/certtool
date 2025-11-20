@@ -1,0 +1,78 @@
+# .editorconfig
+# Lupaxa-wide base style, with per-language tweaks.
+# Applied per-repo so you can tune values (like max line length) as needed.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+indent_style = space
+indent_size = 4
+
+# This is advisory; tools like Ruff still use their own config.
+max_line_length = 200
+
+###############################################################################
+# Python
+###############################################################################
+[*.py]
+indent_style = space
+indent_size = 4
+
+# Docstrings & comments often wrap differently; leave that to Ruff/mypy.
+trim_trailing_whitespace = true
+
+###############################################################################
+# Markdown
+###############################################################################
+[*.md]
+indent_style = space
+indent_size = 2
+# Preserve trailing spaces for Markdown line breaks, etc.
+trim_trailing_whitespace = false
+
+###############################################################################
+# YAML (GitHub Actions, mkdocs.yml, configs)
+###############################################################################
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.yaml]
+indent_style = space
+indent_size = 2
+
+###############################################################################
+# JSON / TOML
+###############################################################################
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.toml]
+indent_style = space
+indent_size = 2
+
+###############################################################################
+# Makefiles (tabs required)
+###############################################################################
+[Makefile]
+indent_style = tab
+
+###############################################################################
+# Shell scripts
+###############################################################################
+[*.sh]
+indent_style = space
+indent_size = 4
+
+###############################################################################
+# Misc configs
+###############################################################################
+[*.ini]
+indent_style = space
+indent_size = 4

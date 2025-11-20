@@ -1,0 +1,215 @@
+###############################################################################
+# LUPAXA PARANOID .gitignore
+# Prevent ALL secrets, certificates, caches, local configs, logs, temp files,
+# IDE project junk, and machine-specific artefacts from ever being committed.
+###############################################################################
+
+###############################################################################
+# Python bytecode / cache
+###############################################################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+###############################################################################
+# Build & packaging outputs
+###############################################################################
+build/
+dist/
+wheelhouse/
+*.egg-info/
+*.egg
+*.whl
+pip-wheel-metadata/
+.eggs/
+
+###############################################################################
+# Virtual environments
+###############################################################################
+venv/
+.env/
+.venv/
+env/
+ENV/
+.conda/
+.python-version  # pyenv local version file
+
+###############################################################################
+# Hatch, Poetry, Pipenv, PDM, Rye, etc.
+###############################################################################
+.hatch/
+.poetry/
+pipenv-files/
+pdm.lock
+pdm.toml
+package-lock.json
+rye.lock
+
+###############################################################################
+# Secrets, credentials, tokens, auth files
+###############################################################################
+*.secret
+*.secrets
+*.credentials
+*.token
+*.tokens
+*.auth
+*.env
+*.env.*             # .env.dev, .env.local, etc.
+.envrc              # direnv
+.secrets.*          # secrets.yaml/json/etc
+*secrets*/          # any directory containing secrets
+*token*/            # any directory containing tokens
+vault.json
+*.gpg
+*.asc
+*.pgp
+
+###############################################################################
+# CertificateTool sensitive outputs (PARANOID)
+###############################################################################
+*.pem
+*.der
+*.csr
+*.key
+*.crt
+*.pfx
+*.cer
+
+certs*/
+keys*/
+output*/
+generated*/
+*.jwk
+*.keystore
+
+# ANYTHING containing "cert" or "key" in name is banned.
+*cert*/
+*key*/
+*keystore*/
+
+###############################################################################
+# Logs, dumps, traces
+###############################################################################
+*.log
+*.audit
+*.trace
+*.out
+*.err
+*.dump
+*.stackdump
+*.core
+core.*
+
+###############################################################################
+# Test artefacts and temporary test outputs
+###############################################################################
+tests/tmp*/
+tests/output*/
+tests/**/assets*/
+coverage.xml
+htmlcov/
+.coverage*
+.nox/
+.tox/
+
+###############################################################################
+# Tooling caches: Ruff, mypy, pytest, pip, coverage, etc.
+###############################################################################
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.tox/
+.nox/
+.cache/
+pytestdebug.log
+pip-log.txt
+
+###############################################################################
+# Documentation — MkDocs, Sphinx, pdoc, etc.
+###############################################################################
+# MkDocs static site output
+site/
+
+# Other doc build outputs
+docs/_build/
+docs/build/
+docs/.cache/
+docs/.benchmarks/
+
+###############################################################################
+# IDE Junk: VSCode, JetBrains, Sublime, etc.
+###############################################################################
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# JetBrains
+.idea/
+*.iml
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Other IDEs
+*.swp
+*.swo
+
+###############################################################################
+# OS Junk
+###############################################################################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+###############################################################################
+# Temporary & generated files
+###############################################################################
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.old
+
+# Editors
+*~
+*.autosave
+
+###############################################################################
+# Local-only configuration files
+###############################################################################
+*.local
+*.override
+*.user
+*.machine
+config.local.*
+settings.local.*
+
+###############################################################################
+# Docker containers, images, volumes
+###############################################################################
+docker/
+docker-compose.override.yml
+
+###############################################################################
+# Git metadata overrides
+###############################################################################
+git-*.sh
+*.diff
+*.patch

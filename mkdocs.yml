@@ -1,0 +1,53 @@
+site_name: Lupaxa CertTool
+site_description: "Generate self-signed certificates, CSRs, and keys from CLI or Python."
+site_url: https://lupaxa-security-toolbox.github.io/self-signed-certificates/
+repo_url: https://github.com/lupaxa-security-toolbox/self-signed-certificates
+repo_name: lupaxa-security-toolbox/self-signed-certificates
+
+# Where the docs live
+docs_dir: docs
+
+# MkDocs theme
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.indexes
+    - toc.integrate
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: light blue
+  icon:
+    repo: fontawesome/brands/github
+
+# "Edit this page" links
+edit_uri: edit/main/docs/
+
+# Markdown extensions
+markdown_extensions:
+  - admonition
+  - def_list
+  - toc:
+      permalink: true
+  - codehilite:
+      guess_lang: false
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+nav:
+  - Overview: index.md
+  - Usage:
+      - Quickstart: usage.md
+      - Configuration: configuration.md
+      - CLI Reference: cli.md
+  - Development:
+      - Contributing: development.md

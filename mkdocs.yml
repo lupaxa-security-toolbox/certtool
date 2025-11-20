@@ -4,10 +4,8 @@ site_url: https://lupaxa-security-toolbox.github.io/self-signed-certificates/
 repo_url: https://github.com/lupaxa-security-toolbox/self-signed-certificates
 repo_name: lupaxa-security-toolbox/self-signed-certificates
 
-# Where the docs live
 docs_dir: docs
 
-# MkDocs theme
 theme:
   name: material
   language: en
@@ -21,15 +19,21 @@ theme:
     - content.action.edit
   palette:
     - scheme: default
-      primary: deep purple
-      accent: light blue
+      primary: blue grey    # base palette; overridden by CSS vars
+      accent: indigo
+    - scheme: slate
+      primary: blue grey
+      accent: indigo
   icon:
     repo: fontawesome/brands/github
+
+# Custom CSS to inject Lupaxa colours
+extra_css:
+  - css/palette.css
 
 # "Edit this page" links
 edit_uri: edit/main/docs/
 
-# Markdown extensions
 markdown_extensions:
   - admonition
   - def_list

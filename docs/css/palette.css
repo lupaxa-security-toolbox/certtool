@@ -1,0 +1,26 @@
+/* Lupaxa colour palette overrides for MkDocs Material
+ *
+ * Brand colours:
+ *   Primary (nav/logo): #111a32
+ *   Secondary / accent: #203959
+ */
+
+/* Default (light) scheme */
+:root {
+  /* Primary brand colour (header, active nav, etc.) */
+  --md-primary-fg-color: #111a32;
+  --md-primary-fg-color--light: #203959;
+  --md-primary-fg-color--dark: #0b1222;
+
+  /* Accent colour (links, buttons, highlights) */
+  --md-accent-fg-color: #203959;
+}
+
+/* Dark / slate scheme */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #111a32;
+  --md-primary-fg-color--light: #203959;
+  --md-primary-fg-color--dark: #050812;
+
+  --md-accent-fg-color: #203959;
+}

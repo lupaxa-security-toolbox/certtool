@@ -34,6 +34,11 @@ from cryptography.hazmat.primitives import (
     serialization,
 )
 from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.serialization import (
+    BestAvailableEncryption,
+    KeySerializationEncryption,
+    NoEncryption,
+)
 from cryptography.x509.oid import NameOID
 
 # ---------------------------------------------------------------------------
@@ -361,12 +366,14 @@ def serialize_cert_components(components: CertComponents, encrypt_key: bool, pas
     GenerationError
         If serialization of any component fails.
     """
+    encryption: KeySerializationEncryption
+
     if encrypt_key:
         if not passphrase:
             raise ConfigError("encrypt_key is true but no passphrase was provided. Set 'passphrase' in the JSON config or via --passphrase.")
-        encryption = serialization.BestAvailableEncryption(passphrase.encode("utf-8"))
+        encryption = BestAvailableEncryption(passphrase.encode("utf-8"))
     else:
-        encryption = serialization.NoEncryption()
+        encryption = NoEncryption()
 
     try:
         private_key_pem = components.private_key.private_bytes(encoding=serialization.Encoding.PEM, format=serialization.PrivateFormat.PKCS8, encryption_algorithm=encryption)

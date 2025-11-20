@@ -164,9 +164,6 @@ def _extract_flat_config(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str
     dn: dict[str, Any] = {}
     cfg: dict[str, Any] = {}
 
-    dn: dict[str, Any] = {}
-    cfg: dict[str, Any] = {}
-
     for key, value in data.items():
         if key in DN_KEYS:
             dn[key] = value

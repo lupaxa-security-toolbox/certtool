@@ -44,10 +44,14 @@ markdown_extensions:
   - pymdownx.snippets
 
 nav:
-  - Overview: index.md
-  - Usage:
-      - Quickstart: usage.md
-      - Configuration: configuration.md
-      - CLI Reference: cli.md
-  - Development:
-      - Contributing: development.md
+  - Home: index.md
+  - Installation: installation.md
+  - Examples: examples.md
+  - Reference:
+      - CLI: reference/cli.md
+      - Config files: reference/config.md
+      - Cert generation API: reference/certs.md
+      - Example helpers: reference/example.md
+      - Exceptions: reference/exceptions.md
+      - Utils: reference/utils.md
+      - Versioning: reference/version.md

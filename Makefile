@@ -18,7 +18,6 @@
 #   make bump-*         # bump version via bump2version
 #   make docs-build     # build static docs site
 #   make docs-serve     # run mkdocs live-reload server
-#   make docs-deploy    # run mkdocs gh-deploy --force
 #   make build          # build wheel + sdist via hatch
 #   make release        # publish via hatch (PyPI config required)
 #   make clean          # remove build / cache artefacts
@@ -50,7 +49,6 @@ AUDIT_PYTHON   := $(AUDIT_VENV_DIR)/bin/python
 	clean \
 	docs-build \
 	docs-serve \
-	docs-deploy \
 	format \
 	format-diff \
 	help \
@@ -90,7 +88,6 @@ help:
 	@echo
 	@echo "  docs-build     Build static MkDocs documentation"
 	@echo "  docs-serve     Serve MkDocs documentation (live reload)"
-	@echo "  docs-deploy    Publish docs to GitHub Pages"
 	@echo
 	@echo "  bump-patch     Bump patch version via bump2version"
 	@echo "  bump-minor     Bump minor version via bump2version"
@@ -172,9 +169,6 @@ docs-build:
 
 docs-serve:
 	$(MKDOCS) serve
-
-docs-deploy:
-	$(MKDOCS) gh-deploy --clean --force
 
 # ---------------------------------------------------------------------------
 # Versioning & Packaging

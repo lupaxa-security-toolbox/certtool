@@ -7,6 +7,10 @@ on:
       - '!v[0-9].[0-9]+.[0-9]+rc[0-9]+'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   id-token: write

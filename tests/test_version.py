@@ -38,4 +38,5 @@ def test_public_and_internal_version_match() -> None:
     """
     assert public_version() == get_version()  # nosec B101
 
+
 # EOF

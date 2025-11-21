@@ -88,4 +88,5 @@ def test_generate_example_config_writes_to_file(tmp_path: Path) -> None:
     assert "dn" in data
     assert "config" in data
 
+
 # EOF

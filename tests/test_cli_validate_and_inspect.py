@@ -216,4 +216,5 @@ def test_config_mode_uses_cli_passphrase_for_encryption(tmp_path) -> None:
     # Sanity check: ensure something was written
     assert any(args.output_dir.iterdir())
 
+
 # EOF

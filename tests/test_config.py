@@ -133,4 +133,5 @@ def test_dn_keys_and_config_default_sanity() -> None:
     for key in ["digest_alg", "private_key_bits", "private_key_type", "valid_days"]:
         assert key in CONFIG_DEFAULT
 
+
 # EOF

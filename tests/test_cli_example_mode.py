@@ -54,6 +54,7 @@ def _base_args() -> argparse.Namespace:
         encrypt_password=None,
     )
 
+
 def test_cli_generate_example_mode_smoke(capsys) -> None:
     """
     Simulate CLI invocation of ``--generate-example`` and verify that JSON
@@ -86,5 +87,6 @@ def test_cli_version_flag_prints_version(capsys) -> None:
     captured = capsys.readouterr()
     out = captured.out.strip()
     assert out == get_version()
+
 
 # EOF

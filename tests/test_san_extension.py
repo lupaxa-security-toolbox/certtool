@@ -73,4 +73,5 @@ def test_certificate_without_san_has_no_san_extension() -> None:
     with pytest.raises(x509.ExtensionNotFound):
         cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)
 
+
 # EOF

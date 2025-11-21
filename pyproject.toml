@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lupaxa-certtool"
-version = "0.1.0"
+version = "0.1.0rc1"
 description = "A Python toolkit and CLI for generating self-signed certificates, CSRs, and private keys."
 readme = "README-PYPI.md"
 license = { text = "MIT" }
@@ -46,7 +46,7 @@ dev = [
   "ruff>=0.6.0",
   "mypy>=1.12.0",
   "types-setuptools",
-  "bump2version>=1.0.1",
+  "bump-my-version>=1.0.0",
   "pip-audit>=2.7.0",
   "mkdocs>=1.6.0",
   "mkdocs-material>=9.5.0",
@@ -67,6 +67,7 @@ path = "src/lupaxa/certtool/version.py"
 include = [
   "src/**",
   "README.md",
+  "README-PYPI.md",
   "LICENSE",
 ]
 
@@ -74,16 +75,21 @@ include = [
 packages = ["src/lupaxa"]
 
 # ---------------------------------------------------------------------------
-# bumpversion / bump2version configuration
+# Versioning configuration (bump-my-version compatible)
 # ---------------------------------------------------------------------------
 
 [tool.bumpversion]
-current_version = "0.1.0"
+current_version = "0.1.0rc1"
 commit = false
 tag = false
-commit_args = ["--no-verify"]
+commit_args = "--no-verify"
 tag_name = "v{new_version}"
 message = "Release {new_version}"
+
+parse = '(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:(?P<release>rc)(?P<build>\\d+))?'
+serialize = [
+  "{major}.{minor}.{patch}{release}{build}",
+]
 
 # The version file inside your package
 [[tool.bumpversion.files]]
@@ -96,6 +102,22 @@ replace = '__version__ = "{new_version}"'
 filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
+
+# Keep tool.bumpversion.current_version in sync
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'current_version = "{current_version}"'
+replace = 'current_version = "{new_version}"'
+
+[tool.bumpversion.part.release]
+# the "rc" label
+values = ["", "rc"]        # "" means "no pre-release" (final)
+optional_value = ""
+
+[tool.bumpversion.part.build]
+# the rc number (e.g., rc1 -> rc2)
+first_value = "1"
+optional_value = "0"
 
 # ---------------------------------------------------------------------------
 # Ruff configuration
@@ -131,31 +153,30 @@ select = [
 
 # Disable D2xx summary/spacing rules that conflict with our preferred style
 ignore = [
-  "D200", # one-line docstring violation (not needed for multi-line)
-  "D201", # no blank line before docstring
-  "D202", # blank line after docstring
-  "D203", # 1 blank line before class docstring
-  "D204", # 1 blank line after class docstring
-  "D205", # 1 blank line required between summary line and description
-  "D206", # various indentation rules
+  "D200",
+  "D201",
+  "D202",
+  "D203",
+  "D204",
+  "D205",
+  "D206",
   "D207",
   "D208",
   "D209",
   "D210",
   "D211",
-  "D212", # "Summary should start at first line" (we prefer second line)
+  "D212",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [
-  "S101",   # allow bare assert in tests
-  "S105",   # allow test-only "password"-like literals
-  "ANN001", # allow untyped fixture arguments
-  "ANN201", # allow untyped test function returns
+  "S101",
+  "S105",
+  "ANN001",
+  "ANN201",
 ]
 
 [tool.ruff.lint.pydocstyle]
-# NumPy-style docstrings, closest to our format
 convention = "numpy"
 
 [tool.ruff.format]

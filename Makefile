@@ -8,25 +8,26 @@
 #   make check-diff     # show Ruff lint diffs (no writes)
 #   make check-diff-all # show Ruff lint + format diffs
 #   make format         # auto-format with Ruff
-#   make format-diff    # show Ruff format diffs (no writes)
+#   make format-diff    # show Ruff format diffs (ruff format --diff)
 #   make type           # run mypy
 #   make test           # run pytest
 #   make test-cov       # run pytest with coverage
-#   make check          # lint + type + test
-#   make check-all      # lint + type + test-cov + audit
+#   make check          # run lint + type + test
+#   make check-all      # run lint + type + test-cov + audit
 #   make audit          # run pip-audit in an isolated venv
-#   make bump-*         # bump version via bump2version
+#   make bump-*         # bump version via bump-my-version (incl. RC helpers)
 #   make docs-build     # build static docs site
 #   make docs-serve     # run mkdocs live-reload server
 #   make build          # build wheel + sdist via hatch
 #   make release        # publish via hatch (PyPI config required)
 #   make clean          # remove build / cache artefacts
+#   make version        # show current project version
 
 PROJECT_NAME := lupaxa-certtool
 
 PYTHON ?= python3
 PIP    ?= $(PYTHON) -m pip
-BUMP   ?= bump2version
+BUMP   ?= bump-my-version
 MKDOCS ?= mkdocs
 
 SRC_DIR  := src
@@ -35,12 +36,18 @@ TEST_DIR := tests
 AUDIT_VENV_DIR := .audit-env
 AUDIT_PYTHON   := $(AUDIT_VENV_DIR)/bin/python
 
+# Extract the current version from pyproject.toml ([project] section)
+PROJECT_VERSION := $(shell sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -n1)
+
 .PHONY: \
 	audit \
 	build \
 	bump-major \
 	bump-minor \
 	bump-patch \
+	bump-rc \
+	bump-rc-patch \
+	bump-final \
 	check \
 	check-all \
 	check-diff \
@@ -58,7 +65,8 @@ AUDIT_PYTHON   := $(AUDIT_VENV_DIR)/bin/python
 	release \
 	test \
 	test-cov \
-	type
+	type \
+	version
 
 # ---------------------------------------------------------------------------
 # Help
@@ -68,34 +76,38 @@ help:
 	@echo "$(PROJECT_NAME) Makefile"
 	@echo
 	@echo "Targets:"
-	@echo "  install-dev    Editable install with dev extras (.[dev])"
-	@echo "  install-test   Editable install with test extras (.[test])"
+	@echo "  install-dev     Editable install with dev extras (.[dev])"
+	@echo "  install-test    Editable install with test extras (.[test])"
 	@echo
-	@echo "  lint           Run Ruff linting + Ruff format --check"
-	@echo "  check-style    Run lint + mypy (style & type checks only)"
-	@echo "  check-diff     Show Ruff lint diffs (ruff check --diff)"
-	@echo "  check-diff-all Show Ruff lint + format diffs"
-	@echo "  format         Run Ruff formatter (auto-format)"
-	@echo "  format-diff    Show Ruff format diffs (ruff format --diff)"
-	@echo "  type           Run mypy type checking"
+	@echo "  lint            Run Ruff linting + Ruff format --check"
+	@echo "  check-style     Run lint + mypy (style & type checks only)"
+	@echo "  check-diff      Show Ruff lint diffs (ruff check --diff)"
+	@echo "  check-diff-all  Show Ruff lint + format diffs"
+	@echo "  format          Run Ruff formatter (auto-format)"
+	@echo "  format-diff     Show Ruff format diffs (ruff format --diff)"
+	@echo "  type            Run mypy type checking"
 	@echo
-	@echo "  test           Run pytest"
-	@echo "  test-cov       Run pytest with coverage"
-	@echo "  check          Run lint, type, and test"
-	@echo "  check-all      Run lint, type, test, coverage, and audit"
+	@echo "  test            Run pytest"
+	@echo "  test-cov        Run pytest with coverage"
+	@echo "  check           Run lint, type, and test"
+	@echo "  check-all       Run lint, type, test, coverage, and audit"
 	@echo
-	@echo "  audit          Run pip-audit in a temporary venv"
+	@echo "  audit           Run pip-audit in a temporary venv"
 	@echo
-	@echo "  docs-build     Build static MkDocs documentation"
-	@echo "  docs-serve     Serve MkDocs documentation (live reload)"
+	@echo "  docs-build      Build static MkDocs documentation"
+	@echo "  docs-serve      Serve MkDocs documentation (live reload)"
 	@echo
-	@echo "  bump-patch     Bump patch version via bump2version"
-	@echo "  bump-minor     Bump minor version via bump2version"
-	@echo "  bump-major     Bump major version via bump2version"
+	@echo "  bump-patch      Bump patch version (final release)"
+	@echo "  bump-minor      Bump minor version (final release)"
+	@echo "  bump-major      Bump major version (final release)"
+	@echo "  bump-rc         Bump RC build number (e.g. 0.1.0rc2 -> 0.1.0rc3)"
+	@echo "  bump-rc-patch   Bump to next patch as RC1 (e.g. 0.1.0 -> 0.1.1rc1)"
+	@echo "  bump-final      Drop RC suffix for final release (e.g. 0.1.0rc3 -> 0.1.0)"
 	@echo
-	@echo "  build          Build distributions via hatch"
-	@echo "  release        Publish distributions via hatch publish"
-	@echo "  clean          Remove build, cache artefacts, and audit venv"
+	@echo "  build           Build distributions via hatch"
+	@echo "  release         Publish distributions via hatch publish"
+	@echo "  version         Show current project version (from pyproject.toml)"
+	@echo "  clean           Remove build, cache artefacts, and audit venv"
 
 # ---------------------------------------------------------------------------
 # Installation
@@ -173,21 +185,41 @@ docs-serve:
 # ---------------------------------------------------------------------------
 # Versioning & Packaging
 # ---------------------------------------------------------------------------
+# NOTE:
+#   Uses bump-my-version, which reads [tool.bumpversion] from pyproject.toml
+#   and supports RC-style schemes in TOML configs.
 
 bump-patch:
-	$(BUMP) patch
+	$(BUMP) bump patch
 
 bump-minor:
-	$(BUMP) minor
+	$(BUMP) bump minor
 
 bump-major:
-	$(BUMP) major
+	$(BUMP) bump major
+
+# Bump current RC build number: 0.1.0rc2 -> 0.1.0rc3
+bump-rc:
+	$(BUMP) bump build
+
+# Start next patch as RC1: 0.1.0 -> 0.1.1rc1
+bump-rc-patch:
+	$(BUMP) bump patch
+
+# Finalize an RC release: 0.1.0rc3 -> 0.1.0
+# (relies on backwards-compatible bump2version-style 'release=' part)
+bump-final:
+	$(BUMP) bump release=
 
 build:
 	hatch build
 
 release: build
 	hatch publish
+
+# Show current version from pyproject.toml
+version:
+	@echo "$(PROJECT_NAME) version: $(PROJECT_VERSION)"
 
 # ---------------------------------------------------------------------------
 # Cleanup

@@ -16,7 +16,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import (
     Any,
-    Union,
+    TypeAlias,
 )
 
 # ---------------------------------------------------------------------------
@@ -53,7 +53,7 @@ CONFIG_DEFAULT: dict[str, Any] = {
 }
 
 #: Type alias for digest algorithms allowed by :mod:`cryptography` for signing.
-DigestAlgorithm = Union[hashes.SHA256, hashes.SHA384, hashes.SHA512]
+DigestAlgorithm: TypeAlias = hashes.SHA256 | hashes.SHA384 | hashes.SHA512
 
 
 # ---------------------------------------------------------------------------

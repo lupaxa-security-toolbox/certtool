@@ -65,6 +65,16 @@ from .exceptions import (
 # ---------------------------------------------------------------------------
 from .utils import DigestAlgorithm
 
+# ---------------------------------------------------------------------------
+# Digests we permit
+# ---------------------------------------------------------------------------
+
+ALLOWED_DIGESTS: dict[str, type[DigestAlgorithm]] = {
+    "sha256": hashes.SHA256,
+    "sha384": hashes.SHA384,
+    "sha512": hashes.SHA512,
+}
+
 
 @dataclass
 class CertComponents:
@@ -177,14 +187,11 @@ def get_digest(digest_name: str) -> DigestAlgorithm:
     ConfigError
         If the digest algorithm is unknown or explicitly disallowed.
     """
-    name = digest_name.lower()
-    if name in ("sha512", "sha-512"):
-        return hashes.SHA512()
-    if name in ("sha384", "sha-384"):
-        return hashes.SHA384()
-    if name in ("sha256", "sha-256"):
-        return hashes.SHA256()
-    raise ConfigError(f"Unsupported or disallowed digest algorithm: {digest_name!r}")
+    key = digest_name.lower()
+    try:
+        return ALLOWED_DIGESTS[key]()  # instance
+    except KeyError as exc:
+        raise ConfigError(f"Unsupported digest: {key!r}") from exc
 
 
 # ---------------------------------------------------------------------------

@@ -37,12 +37,3 @@ src/lupaxa/certtool/
   utils.py
   version.py
 ```
-
-For full details, see:
-
-- [Installation](installation.md)
-- [Usage](usage.md)
-- [Configuration](configuration.md)
-- [CLI Reference](cli.md)
-- [Examples](examples.md)
-- [API Reference](reference/certs.md)

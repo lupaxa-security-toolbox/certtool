@@ -50,6 +50,9 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Usage: usage.md
+  - CLI Quick Start: cli.md
+  - Configuration Overview: configuration.md
   - Examples: examples.md
   - Reference:
       - CLI: reference/cli.md
@@ -59,3 +62,5 @@ nav:
       - Exceptions: reference/exceptions.md
       - Utils: reference/utils.md
       - Versioning: reference/version.md
+  - Development:
+      - Versioning & Releases: developer/versioning.md

@@ -40,3 +40,20 @@ jobs:
         uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e  # v1.13.0
         with:
           repository-url: https://test.pypi.org/legacy/
+
+  generate-release-notes:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-generate-release.yml@master
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - build-and-publish
+      - generate-release-notes
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}
+

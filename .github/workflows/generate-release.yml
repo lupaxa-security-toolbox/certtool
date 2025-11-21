@@ -42,3 +42,19 @@ jobs:
         with:
           # No repository-url => default https://upload.pypi.org/legacy/
           verbose: true
+
+  generate-release-notes:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-generate-release.yml@master
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - build-and-publish
+      - generate-release-notes
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}

@@ -142,7 +142,7 @@ replace = 'current_version = "{new_version}"'
 
 # Pre-release label part (e.g. "rc")
 [tool.bumpversion.parts.pre_l]
-values = ["rc"]
+values = ["", "rc"]
 optional_value = ""
 
 # Pre-release number part (the N in rcN)

@@ -192,7 +192,7 @@ docs-serve:
 # SemVer + pre-release via pre_l / pre_n:
 #   X.Y.Z-devN  -> development builds
 #   X.Y.Z-rcN   -> release candidates
-#   X.Y.Z       -> final
+#   X.Y.Z       -> final (no suffix)
 
 bump-patch:
 	$(BUMP) bump patch
@@ -227,7 +227,7 @@ bump-final:
 		exit 1; \
 	fi; \
 	echo "Finalizing RC to stable from $(PROJECT_VERSION)"; \
-	$(BUMP) bump pre_l
+	$(BUMP) bump pre_l --new-version ""
 
 build:
 	hatch build
@@ -245,7 +245,7 @@ show-version-flow:
 	@if echo "$(PROJECT_VERSION)" | grep -q -- "-dev"; then \
 		echo "Stage: development pre-release"; \
 		echo "Suggested next steps:"; \
-		echo "  - make bump-rc        # promote to first RC (0.1.x-rc0)"; \
+		echo "  - make bump-rc        # promote to first RC (X.Y.Z-rc0)"; \
 		echo "  - or keep iterating at devN"; \
 	elif echo "$(PROJECT_VERSION)" | grep -q -- "-rc"; then \
 		echo "Stage: release candidate"; \

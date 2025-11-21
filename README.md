@@ -29,7 +29,7 @@
   <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
     <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Pull Requests"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE">
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?color=blue&label=License&style=for-the-badge" alt="License"/>
   </a>
   <br />

@@ -151,11 +151,6 @@ replace = 'version = "{new_version}"'
 values = ["dev", "rc", "final"]
 optional_value = "final"
 
-# Pre-release number part (the N in rcN)
-[tool.bumpversion.parts.pre_n]
-first_value = "0"
-optional_value = "1"
-
 # ---------------------------------------------------------------------------
 # Ruff configuration
 # ---------------------------------------------------------------------------

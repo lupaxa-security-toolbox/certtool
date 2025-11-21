@@ -21,9 +21,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  docs:
+  publish-mkdocs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-publish-mkdocs.yml@master
     secrets: inherit
     with:
       python-version: "3.13"
       use-dev-extras: true
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - publish-mkdocs
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master

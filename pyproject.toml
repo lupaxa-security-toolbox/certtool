@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lupaxa-certtool"
-version = "0.1.1-dev0"
+version = "0.1.1-dev1"
 description = "A Python toolkit and CLI for generating self-signed certificates, CSRs, and private keys."
 readme = "README-PYPI.md"
 license = { file = "LICENSE.md" }
@@ -90,7 +90,7 @@ packages = ["src/lupaxa"]
 # ---------------------------------------------------------------------------
 
 [tool.bumpversion]
-current_version = "0.1.1-dev0"
+current_version = "0.1.1-dev1"
 
 # SemVer with optional "-<label><number>" pre-release, e.g. 0.1.0-rc1
 parse = """(?x)

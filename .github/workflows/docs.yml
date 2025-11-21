@@ -62,3 +62,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e  # v4.0.5
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - build
+      - deploy
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}
+

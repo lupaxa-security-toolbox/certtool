@@ -1,9 +1,9 @@
 # Lupaxa CertTool
 
-`lupaxa-certtool` is a small, security-focused utility for generating **self-signed X.509 certificates**, 
+`lupaxa-certtool` is a small, security-focused utility for generating **self-signed X.509 certificates**,
 **certificate signing requests (CSRs)**, and **private keys** from either:
 
-- Command-line options (DN + config), or  
+- Command-line options (DN + config), or
 - One or more JSON configuration files.
 
 It is designed for:

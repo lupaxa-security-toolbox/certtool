@@ -45,4 +45,13 @@ jobs:
       - name: Run tests with coverage
         run: |
           pytest
-            status-check:
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - lint-and-test
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}

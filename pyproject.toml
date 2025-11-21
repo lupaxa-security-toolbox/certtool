@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "A Python toolkit and CLI for generating self-signed certificates, CSRs, and private keys."
 readme = "README.md"
 license = { text = "MIT" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 authors = [
   { name = "The Lupaxa Project" }
@@ -25,10 +25,11 @@ classifiers = [
   "Environment :: Console",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Security :: Cryptography",
   "Topic :: Utilities",
 ]
@@ -102,7 +103,7 @@ replace = 'version = "{new_version}"'
 
 [tool.ruff]
 line-length = 200
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 # Core Lupaxa rule set
@@ -165,7 +166,7 @@ quote-style = "double"
 # ---------------------------------------------------------------------------
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 warn_unused_configs = true
 warn_return_any = true
 warn_unused_ignores = true

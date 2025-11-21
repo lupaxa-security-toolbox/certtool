@@ -14,15 +14,7 @@ from __future__ import annotations
 # Standard library imports
 # ---------------------------------------------------------------------------
 from pathlib import Path
-from typing import (
-    Any,
-    TypeAlias,
-)
-
-# ---------------------------------------------------------------------------
-# Third-party cryptography primitives
-# ---------------------------------------------------------------------------
-from cryptography.hazmat.primitives import hashes
+from typing import Any
 
 # ---------------------------------------------------------------------------
 # Internal exceptions
@@ -51,9 +43,6 @@ CONFIG_DEFAULT: dict[str, Any] = {
     "valid_days": 365,
     "subject_alt_names": [],
 }
-
-#: Type alias for digest algorithms allowed by :mod:`cryptography` for signing.
-DigestAlgorithm: TypeAlias = hashes.SHA256 | hashes.SHA384 | hashes.SHA512
 
 
 # ---------------------------------------------------------------------------

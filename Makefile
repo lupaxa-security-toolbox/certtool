@@ -151,7 +151,7 @@ format-diff:
 # ---------------------------------------------------------------------------
 
 test:
-	pytest
+	pytest -v
 
 test-cov:
 	pytest --cov=lupaxa.certtool --cov-report=term-missing

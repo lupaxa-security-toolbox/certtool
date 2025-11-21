@@ -23,7 +23,10 @@ from datetime import (
     timezone,
 )
 from pathlib import Path
-from typing import Any
+from typing import (
+    Any,
+    TypeAlias,
+)
 
 # ---------------------------------------------------------------------------
 # Third-party cryptography primitives
@@ -61,13 +64,12 @@ from .exceptions import (
 )
 
 # ---------------------------------------------------------------------------
-# Internal utilities
-# ---------------------------------------------------------------------------
-from .utils import DigestAlgorithm
-
-# ---------------------------------------------------------------------------
 # Digests we permit
 # ---------------------------------------------------------------------------
+
+#: Type alias for digest algorithms allowed by :mod:`cryptography` for signing.
+DigestAlgorithm: TypeAlias = hashes.SHA256 | hashes.SHA384 | hashes.SHA512
+
 
 ALLOWED_DIGESTS: dict[str, type[DigestAlgorithm]] = {
     "sha256": hashes.SHA256,

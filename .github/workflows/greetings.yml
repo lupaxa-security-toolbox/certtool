@@ -16,13 +16,13 @@ permissions:
 
 jobs:
   greetings:
-    name: Run Greetings
+    name: Greetings
     uses: the-lupaxa-project/.github/.github/workflows/reusable-greetings.yml@master
     secrets:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 
   status-check:
-    name: Check Jobs Status
+    name: Greetings Status
     needs:
       - greetings
     if: always()

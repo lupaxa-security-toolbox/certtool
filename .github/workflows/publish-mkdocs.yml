@@ -30,7 +30,7 @@ jobs:
       use-dev-extras: true
 
   status-check:
-    name: Check Jobs Status
+    name: Publish Mkdocs Status
     needs:
       - publish-mkdocs
     if: always()

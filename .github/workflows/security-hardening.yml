@@ -23,11 +23,11 @@ permissions:
 
 jobs:
   ensure-sha-pinned:
-    name: Run Ensure SHA-Pinned GitHub Actions
+    name: Ensure SHA-Pinned GitHub Actions
     uses: the-lupaxa-project/.github/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
 
   status-check:
-    name: Check Jobs Status
+    name: Security Hardening Status
     needs:
       - ensure-sha-pinned
     if: always()

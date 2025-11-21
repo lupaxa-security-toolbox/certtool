@@ -26,7 +26,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Jobs Status
+    name: Docs Lint Status
     needs:
       - markdown-lint
       - yaml-lint

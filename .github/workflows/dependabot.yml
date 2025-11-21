@@ -18,7 +18,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Jobs Status
+    name: Dependabot Status
     needs:
       - dependabot
     if: always()

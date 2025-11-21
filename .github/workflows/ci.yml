@@ -19,7 +19,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Jobs Status
+    name: CI Status
     needs:
       - python-ci
     if: always()

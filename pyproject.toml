@@ -34,6 +34,16 @@ classifiers = [
   "Topic :: Utilities",
 ]
 
+# ------------------------------------------------------------
+# URLs (PEP 621 compliant)
+# These show up on PyPI as project links.
+# ------------------------------------------------------------
+[project.urls]
+Homepage = "https://github.com/lupaxa-security-toolbox/certtool"
+Documentation = "https://lupaxa-security-toolbox.github.io/certtool/"
+Repository = "https://github.com/lupaxa-security-toolbox/certtool"
+Issues = "https://github.com/lupaxa-security-toolbox/certtool/issues"
+
 # CLI entry point
 [project.scripts]
 certtool = "lupaxa.certtool.cli:main"

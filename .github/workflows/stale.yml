@@ -16,11 +16,11 @@ permissions:
 
 jobs:
   stale:
-    name: Run Stale Issue & PR Handler
+    name: Stale Issue & PR Handler
     uses: the-lupaxa-project/.github/.github/workflows/reusable-stale.yml@master
 
   status-check:
-    name: Check Jobs Status
+    name: Stale Status
     needs:
       - stale
     if: always()

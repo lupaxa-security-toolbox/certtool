@@ -34,21 +34,11 @@
   </a>
   <br />
   <!-- Python (PyPI) -->
-  <a href="https://pypi.org/project/smartcache/">
-    <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=blue" alt="PyPI Version"/>
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI status" />
-  </a>
-  <a href="#">
-    <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI supported python versions" />
-  </a>
+  <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=blue" alt="PyPI Version"/>
+  <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI status" />
+  <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI supported python versions" />
 </p>
 
 # lupaxa-certtool

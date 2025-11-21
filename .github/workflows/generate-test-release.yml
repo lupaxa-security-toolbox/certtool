@@ -52,7 +52,7 @@ jobs:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
   status-check:
-    name: Check Jobs Status
+    name: Generate Test Release Status
     needs:
       - build-and-publish
       - generate-release-notes

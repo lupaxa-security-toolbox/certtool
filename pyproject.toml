@@ -107,11 +107,11 @@ ignore_missing_files = false
 
 # Git integration
 allow_dirty = false
-commit = false
+commit = true
 message = "Release {new_version}"
 commit_args = ""
 
-tag = false
+tag = true
 sign_tags = false
 tag_name = "v{new_version}"
 tag_message = "Release {new_version}"

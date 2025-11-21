@@ -86,7 +86,8 @@ commit_args = "--no-verify"
 tag_name = "v{new_version}"
 message = "Release {new_version}"
 
-parse = '(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:(?P<release>rc)(?P<build>\\d+))?'
+# NOTE: double-quoted so \\ becomes \ in the actual regex
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:(?P<release>rc)(?P<build>\\d+))?"
 serialize = [
   "{major}.{minor}.{patch}{release}{build}",
 ]

@@ -116,12 +116,12 @@ ignore_missing_version = false
 ignore_missing_files = false
 
 # Git integration
-allow_dirty = false              # refuse to run on a dirty working tree
-commit = true
+allow_dirty = false
+commit = false
 message = "Release {new_version}"
 commit_args = ""
 
-tag = true
+tag = false
 sign_tags = false
 tag_name = "v{new_version}"
 tag_message = "Release {new_version}"
@@ -148,13 +148,13 @@ replace = 'version = "{new_version}"'
 
 # Pre-release label part (e.g. "rc")
 [tool.bumpversion.parts.pre_l]
-values = ["", "rc"]
-optional_value = ""
+values = ["dev", "rc", "final"]
+optional_value = "final"
 
 # Pre-release number part (the N in rcN)
 [tool.bumpversion.parts.pre_n]
-first_value = "1"
-optional_value = ""
+first_value = "0"
+optional_value = "1"
 
 # ---------------------------------------------------------------------------
 # Ruff configuration

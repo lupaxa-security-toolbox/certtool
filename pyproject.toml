@@ -46,7 +46,7 @@ dev = [
   "ruff>=0.6.0",
   "mypy>=1.12.0",
   "types-setuptools",
-  "bump-my-version>=1.0.0",
+  "bump-my-version>=1.2.0",
   "pip-audit>=2.7.0",
   "mkdocs>=1.6.0",
   "mkdocs-material>=9.5.0",
@@ -75,44 +75,75 @@ include = [
 packages = ["src/lupaxa"]
 
 # ---------------------------------------------------------------------------
-# Versioning configuration (bump-my-version compatible)
+# bump-my-version configuration (SemVer + rc pre-releases)
 # ---------------------------------------------------------------------------
 
 [tool.bumpversion]
 current_version = "0.1.0-rc1"
-commit = false
-tag = false
-commit_args = "--no-verify"
-tag_name = "v{new_version}"
-message = "Release {new_version}"
 
-# The version file inside your package
+# SemVer with optional "-<label><number>" pre-release, e.g. 0.1.0-rc1
+parse = """(?x)
+    (?P<major>0|[1-9]\\d*)\\.
+    (?P<minor>0|[1-9]\\d*)\\.
+    (?P<patch>0|[1-9]\\d*)
+    (?:
+        -                             # dash separator for pre-release section
+        (?P<pre_l>[a-zA-Z-]+)         # pre-release label (e.g. rc)
+        (?P<pre_n>0|[1-9]\\d*)        # pre-release version number (e.g. 1)
+    )?                                # pre-release section is optional
+"""
+
+serialize = [
+  "{major}.{minor}.{patch}-{pre_l}{pre_n}",
+  "{major}.{minor}.{patch}",
+]
+
+# Replace all occurrences of current_version with new_version
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+ignore_missing_files = false
+
+# Git integration
+tag = false
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Release {new_version}"
+
+allow_dirty = false          # refuse to run on a dirty working tree
+commit = false
+message = "Release {new_version}"
+commit_args = ""
+
+# Hooks: after committing + tagging, push commits + tags
+setup_hooks = []
+pre_commit_hooks = []
+post_commit_hooks = [
+  "git push",
+  "git push --tags",
+]
+
+# Files where versions are updated
 [[tool.bumpversion.files]]
 filename = "src/lupaxa/certtool/version.py"
 search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
 
-# Also update pyproject version
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
-# Keep tool.bumpversion.current_version in sync
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
 search = 'current_version = "{current_version}"'
 replace = 'current_version = "{new_version}"'
 
-[tool.bumpversion.part.release]
-# the "rc" label
-values = ["", "rc"]        # "" means "no pre-release" (final)
-optional_value = ""
-
-[tool.bumpversion.part.build]
-# the rc number (e.g., rc1 -> rc2)
-first_value = "1"
-optional_value = "0"
+# Pre-release label part: we only really care about "rc" + final
+[tool.bumpversion.parts.pre_l]
+values = ["rc", "final"]
+optional_value = "final"
 
 # ---------------------------------------------------------------------------
 # Ruff configuration
@@ -148,30 +179,31 @@ select = [
 
 # Disable D2xx summary/spacing rules that conflict with our preferred style
 ignore = [
-  "D200",
-  "D201",
-  "D202",
-  "D203",
-  "D204",
-  "D205",
-  "D206",
+  "D200", # one-line docstring violation (not needed for multi-line)
+  "D201", # no blank line before docstring
+  "D202", # blank line after docstring
+  "D203", # 1 blank line before class docstring
+  "D204", # 1 blank line after class docstring
+  "D205", # 1 blank line required between summary line and description
+  "D206", # various indentation rules
   "D207",
   "D208",
   "D209",
   "D210",
   "D211",
-  "D212",
+  "D212", # "Summary should start at first line" (we prefer second line)
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [
-  "S101",
-  "S105",
-  "ANN001",
-  "ANN201",
+  "S101",   # allow bare assert in tests
+  "S105",   # allow test-only "password"-like literals
+  "ANN001", # allow untyped fixture arguments
+  "ANN201", # allow untyped test function returns
 ]
 
 [tool.ruff.lint.pydocstyle]
+# NumPy-style docstrings, closest to our format
 convention = "numpy"
 
 [tool.ruff.format]

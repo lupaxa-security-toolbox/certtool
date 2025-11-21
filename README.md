@@ -4,31 +4,31 @@
     <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
   </a>
   <!-- Core project badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/self-signed-certificates/ci.yml?branch=master&label=build%20status&style=for-the-badge" alt="Build Status"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?branch=master&label=build%20status&style=for-the-badge" alt="Build Status"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/self-signed-certificates?color=blue&label=Latest%20Release&style=for-the-badge" alt="Latest Release"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases/latest">
+    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?color=blue&label=Latest%20Release&style=for-the-badge" alt="Latest Release"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/self-signed-certificates?color=blue&label=Released&style=for-the-badge" alt="Release Date"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases">
+    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?color=blue&label=Released&style=for-the-badge" alt="Release Date"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/self-signed-certificates/latest.svg?color=blue&style=for-the-badge" alt="Commits Since Release"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/master">
+    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?color=blue&style=for-the-badge" alt="Commits Since Release"/>
   </a>
   <br/>
   <!-- Community & ecosystem badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/self-signed-certificates?style=for-the-badge&color=blue" alt="Contributors"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Contributors"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/issues">
-    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/self-signed-certificates?style=for-the-badge&color=blue" alt="Open Issues"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/issues">
+    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Issues"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/pulls">
-    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/self-signed-certificates?style=for-the-badge&color=blue" alt="Open Pull Requests"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
+    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Pull Requests"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/self-signed-certificates/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/self-signed-certificates?color=blue&label=License&style=for-the-badge" alt="License"/>
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?color=blue&label=License&style=for-the-badge" alt="License"/>
   </a>
   <br />
   <!-- Python (PyPI) -->

@@ -1,8 +1,8 @@
 site_name: Lupaxa CertTool
 site_description: "Generate self-signed certificates, CSRs, and keys from CLI or Python."
-site_url: https://lupaxa-security-toolbox.github.io/self-signed-certificates/
-repo_url: https://github.com/lupaxa-security-toolbox/self-signed-certificates
-repo_name: lupaxa-security-toolbox/self-signed-certificates
+site_url: https://lupaxa-security-toolbox.github.io/certtool/
+repo_url: https://github.com/lupaxa-security-toolbox/certtool
+repo_name: lupaxa-security-toolbox/certtool
 
 docs_dir: docs
 

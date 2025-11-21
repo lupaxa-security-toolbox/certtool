@@ -1,0 +1,31 @@
+name: Greetings
+
+on:
+  pull_request:
+  issues:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  greetings:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-greetings.yml@master
+    secrets:
+      repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - greetings
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}

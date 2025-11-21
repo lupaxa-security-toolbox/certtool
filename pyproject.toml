@@ -130,15 +130,11 @@ filename = "src/lupaxa/certtool/version.py"
 search = '__version__ = "{current_version}"'
 replace = '__version__ = "{new_version}"'
 
+# update version AND current_verison in this file
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
-
-[[tool.bumpversion.files]]
-filename = "pyproject.toml"
-search = 'current_version = "{current_version}"'
-replace = 'current_version = "{new_version}"'
 
 # Pre-release label part (e.g. "rc")
 [tool.bumpversion.parts.pre_l]

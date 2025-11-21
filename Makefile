@@ -100,9 +100,9 @@ help:
 	@echo "  bump-patch      Bump patch version (final release)"
 	@echo "  bump-minor      Bump minor version (final release)"
 	@echo "  bump-major      Bump major version (final release)"
-	@echo "  bump-rc         Bump RC build number (e.g. 0.1.0rc2 -> 0.1.0rc3)"
-	@echo "  bump-rc-patch   Bump to next patch as RC1 (e.g. 0.1.0 -> 0.1.1rc1)"
-	@echo "  bump-final      Drop RC suffix for final release (e.g. 0.1.0rc3 -> 0.1.0)"
+	@echo "  bump-rc         Bump RC build number (e.g. 0.1.0-rc2 -> 0.1.0-rc3)"
+	@echo "  bump-rc-patch   Bump to next patch as RC (e.g. 0.1.0 -> 0.1.1-rc0)"
+	@echo "  bump-final      Drop RC suffix for final release (e.g. 0.1.0-rc3 -> 0.1.0)"
 	@echo
 	@echo "  build           Build distributions via hatch"
 	@echo "  release         Publish distributions via hatch publish"
@@ -187,7 +187,7 @@ docs-serve:
 # ---------------------------------------------------------------------------
 # NOTE:
 #   Uses bump-my-version, which reads [tool.bumpversion] from pyproject.toml
-#   and supports RC-style schemes in TOML configs.
+#   and supports SemVer + rc pre-releases via pre_l / pre_n.
 
 bump-patch:
 	$(BUMP) bump patch
@@ -198,18 +198,19 @@ bump-minor:
 bump-major:
 	$(BUMP) bump major
 
-# Bump current RC build number: 0.1.0rc2 -> 0.1.0rc3
+# Bump current RC build number: 0.1.0-rc2 -> 0.1.0-rc3
 bump-rc:
-	$(BUMP) bump build
+	$(BUMP) bump pre_n
 
-# Start next patch as RC1: 0.1.0 -> 0.1.1rc1
+# Start next patch line as RC (e.g. 0.1.0 -> 0.1.1-rc0)
+# This assumes the SemVer+pre_l flow from the bump-my-version docs.
 bump-rc-patch:
 	$(BUMP) bump patch
+	$(BUMP) bump pre_l
 
-# Finalize an RC release: 0.1.0rc3 -> 0.1.0
-# (relies on backwards-compatible bump2version-style 'release=' part)
+# Finalize an RC release: 0.1.0-rc3 -> 0.1.0
 bump-final:
-	$(BUMP) bump release=
+	$(BUMP) bump pre_l
 
 build:
 	hatch build

@@ -15,7 +15,7 @@
 #   make check             # run lint + type + test
 #   make check-all         # run lint + type + test-cov + audit
 #   make audit             # run pip-audit in an isolated venv
-#   make bump-*            # bump version via bump-my-version (incl. dev/RC helpers)
+#   make bump-*            # bump version via bump-my-version (dev/RC/final helpers)
 #   make docs-build        # build static docs site
 #   make docs-serve        # run mkdocs live-reload server
 #   make build             # build wheel + sdist via hatch
@@ -37,7 +37,7 @@ TEST_DIR := tests
 AUDIT_VENV_DIR := .audit-env
 AUDIT_PYTHON   := $(AUDIT_VENV_DIR)/bin/python
 
-# Extract the current version from pyproject.toml ([project] section)
+# Extract the current version from pyproject.toml ([project].version)
 PROJECT_VERSION := $(shell sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -n1)
 
 .PHONY: \
@@ -46,6 +46,7 @@ PROJECT_VERSION := $(shell sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | 
 	bump-major \
 	bump-minor \
 	bump-patch \
+	bump-dev \
 	bump-rc \
 	bump-rc-patch \
 	bump-final \
@@ -99,12 +100,13 @@ help:
 	@echo "  docs-build          Build static MkDocs documentation"
 	@echo "  docs-serve          Serve MkDocs documentation (live reload)"
 	@echo
-	@echo "  bump-patch          Bump patch (SemVer) – usually starts next dev cycle"
-	@echo "  bump-minor          Bump minor version (SemVer)"
-	@echo "  bump-major          Bump major version (SemVer)"
-	@echo "  bump-rc             Promote dev -> rc0, or rcN -> rc(N+1)"
-	@echo "  bump-rc-patch       Start next patch directly as rc0 (skips dev)"
-	@echo "  bump-final          Finalize RC: rcN -> final (drop pre-release)"
+	@echo "  bump-patch          Bump patch (X.Y.Z -> X.Y.(Z+1), drop any suffix)"
+	@echo "  bump-minor          Bump minor (X.Y.Z -> X.(Y+1).0, drop suffix)"
+	@echo "  bump-major          Bump major (X.Y.Z -> (X+1).0.0, drop suffix)"
+	@echo "  bump-dev            Patch bump + -dev1, or devN -> dev(N+1)"
+	@echo "  bump-rc             Patch bump + -rc1, or devN -> rc1, or rcN -> rc(N+1)"
+	@echo "  bump-rc-patch       Start next patch directly as rc1 (skips dev)"
+	@echo "  bump-final          Drop -devN / -rcN suffix (final release)"
 	@echo
 	@echo "  version             Show current project version"
 	@echo "  show-version-flow   Show stage (dev/rc/final) + suggested next steps"
@@ -189,45 +191,141 @@ docs-serve:
 # Versioning & Packaging
 # ---------------------------------------------------------------------------
 # Uses bump-my-version with [tool.bumpversion] in pyproject.toml
-# SemVer + pre-release via pre_l / pre_n:
-#   X.Y.Z-devN  -> development builds
-#   X.Y.Z-rcN   -> release candidates
-#   X.Y.Z       -> final (no suffix)
+# We treat the whole version as a single "version" part and compute new
+# versions in shell, then call:
+#   bump-my-version bump version --new-version "…"
+
+# Helpers: parse X.Y.Z into major/minor/patch in shell
+# (done inline in each recipe for clarity)
 
 bump-patch:
-	$(BUMP) bump patch
+	@current="$(PROJECT_VERSION)"; \
+	base="$${current%%-*}"; \
+	major="$${base%%.*}"; \
+	minor_patch="$${base#*.}"; \
+	minor="$${minor_patch%%.*}"; \
+	patch="$${minor_patch##*.}"; \
+	new_patch=$$((patch + 1)); \
+	new_version="$$major.$$minor.$$new_patch"; \
+	echo "Bump patch: $$current -> $$new_version"; \
+	$(BUMP) bump version --new-version "$$new_version"
 
 bump-minor:
-	$(BUMP) bump minor
+	@current="$(PROJECT_VERSION)"; \
+	base="$${current%%-*}"; \
+	major="$${base%%.*}"; \
+	minor_patch="$${base#*.}"; \
+	minor="$${minor_patch%%.*}"; \
+	new_minor=$$((minor + 1)); \
+	new_version="$$major.$$new_minor.0"; \
+	echo "Bump minor: $$current -> $$new_version"; \
+	$(BUMP) bump version --new-version "$$new_version"
 
 bump-major:
-	$(BUMP) bump major
+	@current="$(PROJECT_VERSION)"; \
+	base="$${current%%-*}"; \
+	major="$${base%%.*}"; \
+	new_major=$$((major + 1)); \
+	new_version="$$new_major.0.0"; \
+	echo "Bump major: $$current -> $$new_version"; \
+	$(BUMP) bump version --new-version "$$new_version"
 
-# Promote dev -> rc0, or bump rcN -> rc(N+1)
+# bump-dev logic:
+#   - If X.Y.Z        -> X.Y.(Z+1)-dev1
+#   - If X.Y.Z-devN   -> X.Y.Z-dev(N+1)
+#   - If X.Y.Z-rcN    -> ERROR (use bump-final / bump-rc instead)
+
+bump-dev:
+	@current="$(PROJECT_VERSION)"; \
+	case "$$current" in \
+		*-rc[0-9]*) \
+			echo "ERROR: bump-dev must not be called on RC versions ($$current). Use bump-rc or bump-final." >&2; \
+			exit 1 ;; \
+		*-dev[0-9]*) \
+			base="$${current%-dev*}"; \
+			n="$${current##*-dev}"; \
+			new_n=$$((n + 1)); \
+			new_version="$$base-dev$$new_n"; \
+			echo "Bump dev: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+		*) \
+			base="$${current%%-*}"; \
+			major="$${base%%.*}"; \
+			minor_patch="$${base#*.}"; \
+			minor="$${minor_patch%%.*}"; \
+			patch="$${minor_patch##*.}"; \
+			new_patch=$$((patch + 1)); \
+			new_base="$$major.$$minor.$$new_patch"; \
+			new_version="$$new_base-dev1"; \
+			echo "Bump dev from final: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+	esac
+
+# bump-rc logic:
+#   - If X.Y.Z        -> X.Y.(Z+1)-rc1
+#   - If X.Y.Z-devN   -> X.Y.Z-rc1
+#   - If X.Y.Z-rcN    -> X.Y.Z-rc(N+1)
+
 bump-rc:
-	@if echo "$(PROJECT_VERSION)" | grep -q -- "-dev"; then \
-		echo "Promoting dev to rc0 from $(PROJECT_VERSION)"; \
-		$(BUMP) bump pre_l --new-version rc; \
-		$(BUMP) bump pre_n --new-version 0; \
-	else \
-		echo "Bumping existing rc pre_n from $(PROJECT_VERSION)"; \
-		$(BUMP) bump pre_n; \
-	fi
+	@current="$(PROJECT_VERSION)"; \
+	case "$$current" in \
+		*-dev[0-9]*) \
+			base="$${current%-dev*}"; \
+			new_version="$$base-rc1"; \
+			echo "Promote dev to rc1: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+		*-rc[0-9]*) \
+			base="$${current%-rc*}"; \
+			n="$${current##*-rc}"; \
+			new_n=$$((n + 1)); \
+			new_version="$$base-rc$$new_n"; \
+			echo "Bump RC: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+		*) \
+			base="$${current%%-*}"; \
+			major="$${base%%.*}"; \
+			minor_patch="$${base#*.}"; \
+			minor="$${minor_patch%%.*}"; \
+			patch="$${minor_patch##*.}"; \
+			new_patch=$$((patch + 1)); \
+			new_base="$$major.$$minor.$$new_patch"; \
+			new_version="$$new_base-rc1"; \
+			echo "Start RC from final: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+	esac
 
-# Start next patch as rc0 directly (e.g. 0.1.0 -> 0.1.1-rc0)
+# Start next patch directly as rc1, skipping dev:
+#   X.Y.Z           -> X.Y.(Z+1)-rc1
+#   X.Y.Z-devN/rcN  -> always based on the numeric part, then -rc1
+
 bump-rc-patch:
-	$(BUMP) bump patch
-	$(BUMP) bump pre_l --new-version rc
-	$(BUMP) bump pre_n --new-version 0
+	@current="$(PROJECT_VERSION)"; \
+	base="$${current%%-*}"; \
+	major="$${base%%.*}"; \
+	minor_patch="$${base#*.}"; \
+	minor="$${minor_patch%%.*}"; \
+	patch="$${minor_patch##*.}"; \
+	new_patch=$$((patch + 1)); \
+	new_base="$$major.$$minor.$$new_patch"; \
+	new_version="$$new_base-rc1"; \
+	echo "Start new patch RC: $$current -> $$new_version"; \
+	$(BUMP) bump version --new-version "$$new_version"
 
-# Finalize an RC release: X.Y.Z-rcN -> X.Y.Z (drop pre-release)
+# Finalize dev/RC to stable:
+#   X.Y.Z-devN  -> X.Y.Z
+#   X.Y.Z-rcN   -> X.Y.Z
+
 bump-final:
-	@if ! echo "$(PROJECT_VERSION)" | grep -q -- "-rc[0-9]\+"; then \
-		echo "ERROR: bump-final can only be run from an -rcN version (current: $(PROJECT_VERSION))" >&2; \
-		exit 1; \
-	fi; \
-	echo "Finalizing RC to stable from $(PROJECT_VERSION)"; \
-	$(BUMP) bump pre_l --new-version ""
+	@current="$(PROJECT_VERSION)"; \
+	case "$$current" in \
+		*-dev[0-9]*|*-rc[0-9]*) \
+			new_version="$${current%%-*}"; \
+			echo "Finalize pre-release: $$current -> $$new_version"; \
+			$(BUMP) bump version --new-version "$$new_version";; \
+		*) \
+			echo "ERROR: bump-final expects a -devN or -rcN version (current: $$current)" >&2; \
+			exit 1;; \
+	esac
 
 build:
 	hatch build
@@ -245,8 +343,8 @@ show-version-flow:
 	@if echo "$(PROJECT_VERSION)" | grep -q -- "-dev"; then \
 		echo "Stage: development pre-release"; \
 		echo "Suggested next steps:"; \
-		echo "  - make bump-rc        # promote to first RC (X.Y.Z-rc0)"; \
-		echo "  - or keep iterating at devN"; \
+		echo "  - make bump-dev       # continue devN cycle"; \
+		echo "  - make bump-rc        # promote to first RC (X.Y.Z-rc1)"; \
 	elif echo "$(PROJECT_VERSION)" | grep -q -- "-rc"; then \
 		echo "Stage: release candidate"; \
 		echo "Suggested next steps:"; \
@@ -255,9 +353,11 @@ show-version-flow:
 	else \
 		echo "Stage: final / stable release"; \
 		echo "Suggested next steps:"; \
-		echo "  - make bump-patch     # start next patch dev cycle (X.Y.(Z+1)-dev0)"; \
-		echo "  - make bump-minor     # start next minor dev cycle (X.(Y+1).0-dev0)"; \
-		echo "  - make bump-major     # start next major dev cycle ((X+1).0.0-dev0)"; \
+		echo "  - make bump-patch     # bump patch (X.Y.(Z+1))"; \
+		echo "  - make bump-dev       # start next patch dev cycle (X.Y.(Z+1)-dev1)"; \
+		echo "  - make bump-rc        # start next patch RC cycle (X.Y.(Z+1)-rc1)"; \
+		echo "  - make bump-minor     # bump minor (X.(Y+1).0)"; \
+		echo "  - make bump-major     # bump major ((X+1).0.0)"; \
 	fi
 
 # ---------------------------------------------------------------------------

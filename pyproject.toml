@@ -92,21 +92,10 @@ packages = ["src/lupaxa"]
 [tool.bumpversion]
 current_version = "0.1.1-dev1"
 
-# SemVer with optional "-<label><number>" pre-release, e.g. 0.1.0-rc1
-parse = """(?x)
-    (?P<major>0|[1-9]\\d*)\\.
-    (?P<minor>0|[1-9]\\d*)\\.
-    (?P<patch>0|[1-9]\\d*)
-    (?:
-        -                             # dash separator for pre-release section
-        (?P<pre_l>[a-zA-Z-]+)         # pre-release label (e.g. rc)
-        (?P<pre_n>0|[1-9]\\d*)        # pre-release version number (e.g. 1)
-    )?                                # pre-release section is optional
-"""
-
+# Treat the entire version as a single opaque string part: "version"
+parse = "(?P<version>.*)"
 serialize = [
-  "{major}.{minor}.{patch}-{pre_l}{pre_n}",
-  "{major}.{minor}.{patch}",
+  "{version}",
 ]
 
 # Default search/replace behaviour; file-specific overrides below
@@ -146,16 +135,6 @@ replace = '__version__ = "{new_version}"'
 filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
-
-# Pre-release label part (e.g. "rc")
-[tool.bumpversion.parts.pre_l]
-values = ["dev", "rc", ""]
-optional_value = ""
-
-# Pre-release number part (N in devN / rcN)
-[tool.bumpversion.parts.pre_n]
-first_value = "0"
-optional_value = "0"
 
 # ---------------------------------------------------------------------------
 # Ruff configuration

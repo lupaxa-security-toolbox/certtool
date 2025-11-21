@@ -8,7 +8,7 @@ used by both the library API and the command-line interface.
 from __future__ import annotations
 
 #: The package version, kept in sync with ``pyproject.toml``.
-__version__ = "0.1.0-rc1"
+__version__ = "0.1.0-rc2"
 
 
 def get_version() -> str:

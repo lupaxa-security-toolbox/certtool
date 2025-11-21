@@ -7,16 +7,16 @@
   Part of The Lupaxa Project.<br /><br />
   <!-- Core project badges -->
   <a href="https://github.com/lupaxa-security-toolbox/certtool/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?branch=master&label=build%20status&style=for-the-badge" alt="Build Status"/>
+    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?color=blue&label=Latest%20Release&style=for-the-badge" alt="Latest Release"/>
+    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=Latest%20Release" alt="Latest Release"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?color=blue&label=Released&style=for-the-badge" alt="Release Date"/>
+    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=Released" alt="Release Date"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?color=blue&style=for-the-badge" alt="Commits Since Release"/>
+    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?style=for-the-badge&color=blue" alt="Commits Since Release"/>
   </a>
   <br/>
   <!-- Community & ecosystem badges -->
@@ -30,7 +30,7 @@
     <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Pull Requests"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE.md">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?color=blue&label=License&style=for-the-badge" alt="License"/>
+    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=License" alt="License"/>
   </a>
   <br />
   <!-- Python (PyPI) -->

@@ -1,53 +1,50 @@
 # Versioning & Release Process
 
-This project follows **Semantic Versioning (SemVer)** with two kinds of pre-releases:
+This project uses **Semantic Versioning (SemVer)** with optional **pre-release
+suffixes** for development and release candidate builds.
 
-- `-devN` – development snapshots
-- `-rcN` – release candidates
+We keep things intentionally simple and script-driven via `make` targets.
 
-All bumps are driven via:
+## Version Formats
 
-- [`bump-my-version`](https://github.com/callowayproject/bump-my-version) (configured in `pyproject.toml`)
-- `make` targets that wrap the common flows
-- Git tags (`vX.Y.Z[-suffix]`)
-
-> TL;DR: we use versions like `0.1.1-dev0`, `0.1.1-rc1`, `0.1.1`, and we *never* edit versions by hand — we use `make bump-*`.
-
----
-
-## Semantic Versioning
-
-We use the standard SemVer pattern with optional pre-release:
+All versions follow:
 
 ```text
-MAJOR.MINOR.PATCH[-rcN]
+MAJOR.MINOR.PATCH[-devN | -rcN]
 ```
 
 Where:
 
-- MAJOR – incompatible API changes
+- MAJOR – incompatible / breaking changes
 - MINOR – backwards-compatible feature additions
 - PATCH – backwards-compatible bug fixes
-- -devN – development pre-release for that MAJOR.MINOR.PATCH
-- -rcN – release candidate for that MAJOR.MINOR.PATCH
+- Optional -devN – development snapshots for a given version
+- Optional -rcN – release candidates for a given version
 
 Examples:
 
-- 0.1.0 – initial stable 0.1 release
-- 0.1.1-dev0 – start of the 0.1.1 development cycle
-- 0.1.1-dev3 – fourth dev snapshot for 0.1.1
+- 0.1.0 – stable release
+- 0.1.1-dev1 – first dev snapshot for the upcoming 0.1.1
+- 0.1.1-dev2 – second dev snapshot for the same target
 - 0.1.1-rc1 – first release candidate for 0.1.1
 - 0.1.1 – final 0.1.1 release
 
-We **never** ship 0.1.0-rc1 after a final 0.1.0 is already published. RCs always target the next version (e.g. 0.1.1-rc1 after 0.1.0 is released).
+At any point in time, one of these should be true:
+
+- You are on a stable version: X.Y.Z
+- You are iterating on dev snapshots: X.Y.Z-devN
+- You are iterating on release candidates: X.Y.Z-rcN
 
 ## Version Sources of Truth
 
-The version lives in:
+The version is stored in:
 
 - pyproject.toml → [project].version
 - pyproject.toml → [tool.bumpversion].current_version
 - src/lupaxa/certtool/version.py → \_\_version\_\_ = "…"
+
+Those are kept in sync by the version bump tools and make targets.
+You should never edit them by hand unless you are repairing a broken state.
 
 Configuration (simplified) lives under:
 
@@ -72,285 +69,162 @@ search = 'current_version = "{current_version}"'
 replace = 'current_version = "{new_version}"'
 ```
 
-Every bump creates a Git tag of the form:
+## High-level bumping rules
 
-```text
-vMAJOR.MINOR.PATCH[-rcN]
-```
+The project uses a small set of make targets that encapsulate all the logic.
+Conceptually, they behave as follows:
 
-Examples:
+1. Base SemVer bumps (no pre-release suffix):
+    - bump-patch : X.Y.Z → X.Y.(Z+1)
+    - bump-minor : X.Y.Z → X.(Y+1).0
+    - bump-major : X.Y.Z → (X+1).0.0
 
-- v0.1.1-dev0
-- v0.1.1-rc1
-- v0.1.1
+2. Development snapshots:
 
-Tags and commits are created and pushed automatically by bump-my-version (via the hooks configured in pyproject.toml).
-
-## Make Targets (versioning)
-
-Version management is done via make targets that call bump-my-version for you:
-
-> [!IMPORTANT]
->
-> - Working tree must be clean (no uncommitted changes).
-> - Run on a sensible protected branch (typically master).
-> - Don’t edit version.py or pyproject.toml version fields by hand.
-
-### Inspect current version / stage
+Use this when you want to mark “work in progress” snapshots but don’t want
+to commit to an RC yet.
 
 ```bash
-make show-version-flow
+make bump-dev
 ```
 
-This prints:
+Behaviour:
 
-- Current version (e.g. 0.1.1-dev3, 0.1.1-rc1, 0.1.1)
-- Detected stage: development, release candidate, or final
-- Suggested next make bump-* commands
+- If current version is stable:
+  - X.Y.Z → X.Y.(Z+1)-dev1
+- If current version is already dev:
+  - X.Y.Z-devN → X.Y.Z-dev(N+1)
+- If current version is rc:
+  - X.Y.Z-rcN → error (you should either go to final or bump the patch first)
 
-You can also do:
+3. Release candidates:
 
-```bash
-make version
-```
-
-to just print the raw version.
-
-### Final Releases (SemVer bumps)
-
-These bump the final SemVer components. They’re usually used to start a new development cycle.
-
-### Patch release line (e.g. 0.1.0 → 0.1.1-dev0)
-
-From a final release like:
-
-```text
-0.1.0
-```
-
-run:
-
-```bash
-make bump-patch
-```
-
-Result (conceptually):
-
-- 0.1.0 → 0.1.1-dev0
-
-Similarly:
-
-### Minor release (e.g. 0.1.1 → 0.2.0-dev0):
-
-```bash
-make bump-minor
-```
-
-### Major release (e.g. 0.2.0 → 1.0.0-dev0):
-
-```bash
-make bump-major
-```
-
-Each of these will:
-
-1. Update all version files.
-2. Create a commit: Release X.Y.Z-dev0 (or similar).
-3. Tag: vX.Y.Z-dev0.
-4. Push commit and tag to origin.
-
-You can then continue making changes, bumping dev versions as needed (or just stick with -dev0 until you’re ready for RC).
-
-## RC (release candidate) workflow
-
-RCs use the -rcN suffix:
-
-- First RC: X.Y.Z-rc0
-- Subsequent RCs: X.Y.Z-rc1, X.Y.Z-rc2, …
-
-### Promote dev → RC
-
-From a dev build, e.g.:
-
-```text
-0.1.1-dev3
-```
-
-run:
+Use this when you think the change set is “release-shaped” and you want
+something candidates can be tested against (CI, TestPyPI, etc.).
 
 ```bash
 make bump-rc
 ```
 
-This will:
+Behaviour:
 
-- switch the label from dev → rc
-- reset the RC counter to 0
-- result in: 0.1.1-rc0
-- commit, tag v0.1.1-rc0, and push
+- If current version is dev:
+  - X.Y.Z-devN → X.Y.Z-rc1
+(drops the dev suffix and starts RCs for that same version)
+- If current version is rc:
+  - X.Y.Z-rcN → X.Y.Z-rc(N+1)
+- If current version is stable:
+  - X.Y.Z → X.Y.(Z+1)-rc1 (bumps patch and starts RCs for the next patch)
 
-If you run make bump-rc again from an RC:
+4. Final releases:
 
-```text
-0.1.1-rc0  ->  0.1.1-rc1
-0.1.1-rc1  ->  0.1.1-rc2
-...
-```
-
-### Start RCs directly from a final release
-
-Sometimes you want to skip the explicit -dev phase and go straight to RCs for the next patch.
-
-From:
-
-```text
-0.1.0
-```
-
-run:
-
-```bash
-make bump-rc-patch
-```
-
-This will:
-
-1. Bump the patch: 0.1.0 → 0.1.1
-2. Switch to RC label and set RC number to 0: 0.1.1 → 0.1.1-rc0
-3. Commit, tag v0.1.1-rc0, and push
-
-You can then continue with:
-
-```bash
-make bump-rc   # 0.1.1-rc0 -> 0.1.1-rc1, etc.
-```
-
-### Finalise RC → Stable
-
-Once the RC is good to go, e.g.:
-
-```text
-0.1.1-rc3
-```
-
-run:
+Use this when you are confident an RC (or dev snapshot) is now a true release.
 
 ```bash
 make bump-final
 ```
 
-This:
+Behaviour:
 
-- drops the -rcN suffix
-- produces: 0.1.1
-- commits and tags v0.1.1
-- pushes to origin
+- If current version is X.Y.Z-rcN → X.Y.Z
+  - (drops the RC suffix and finalises the version)
+- If current version is X.Y.Z-devN → X.Y.Z
+  - (drops the dev suffix and finalises, though this should be rare in practice)
+- If current version is already X.Y.Z → no-op / error
 
-## CI & Publishing
+## Make targets summary
 
-### TestPyPI (pre-release / RC)
-
-RC tags are published to TestPyPI. The workflow is typically triggered by tags matching:
-
-```bash
-on:
-  push:
-    tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'
-```
-
-Typical RC flow:
-
-1. make bump-rc-patch → 0.1.1-rc0 → tag v0.1.1-rc0
-2. Push → TestPyPI workflow runs → package published to TestPyPI
-3. Optionally iterate with make bump-rc for additional RCs: v0.1.1-rc1, v0.1.1-rc2, …
-
-Typical flow:
-
-1. make bump-rc-patch → 0.1.1-rc1 → tag v0.1.1-rc1
-2. Push triggers TestPyPI workflow
-3. Verify the package behaves as expected in downstream automation
-
-You can repeat make bump-rc for rc2, rc3, … as needed.
-
-### PyPI (final releases)
-
-Final tags (no -rcN) are published to PyPI. The workflow is typically:
+These are the version-related make targets and what they mean:
 
 ```bash
-on:
-  push:
-    tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'
-      - '!v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'
+# Pure SemVer bumps (no -dev/-rc added automatically)
+make bump-patch     # X.Y.Z       -> X.Y.(Z+1)
+make bump-minor     # X.Y.Z       -> X.(Y+1).0
+make bump-major     # X.Y.Z       -> (X+1).0.0
+
+# Development pre-releases
+make bump-dev       # X.Y.Z       -> X.Y.(Z+1)-dev1
+                    # X.Y.Z-devN  -> X.Y.Z-dev(N+1)
+
+# Release candidates
+make bump-rc        # X.Y.Z-devN  -> X.Y.Z-rc1
+                    # X.Y.Z-rcN   -> X.Y.Z-rc(N+1)
+                    # X.Y.Z       -> X.Y.(Z+1)-rc1
+
+# Finalisation
+make bump-final     # X.Y.Z-rcN   -> X.Y.Z
+                    # X.Y.Z-devN  -> X.Y.Z
 ```
 
-So:
+> [!NOTE]
+>
+> Implementation detail:
+> Under the hood we use bump-my-version for the core MAJOR.MINOR.PATCH
+> bumping, and lightweight text editing for the -devN / -rcN suffixes.
+> You don’t need to call bump-my-version directly - always go via make.
 
-- Tags like v0.1.1 trigger the PyPI publish workflow.
-- Tags like v0.1.1-rc1 do not.
+## Typical flows
 
-## Recommended Release Flow
+1. Tiny patch, no pre-releases
 
-### New patch release (with RCs)
-
-Assume latest stable is 0.1.0.
-
-1. Make sure everything passes:
+For a very small / low-risk change where you’re happy to ship directly:
 
 ```bash
-make check-all
+make check-all      # lint, types, tests, coverage
+make bump-patch     # 0.1.0 -> 0.1.1
+git push --tags     # if not already pushed by the tooling
 ```
 
-2. Start patch RC cycle:
+CI will treat 0.1.1 as a standard release (e.g. publish to PyPI if configured).
+
+2. Normal patch with dev + RC
+
+Assume latest stable is 0.1.0 and you’re starting work on 0.1.1:
 
 ```bash
-make bump-rc-patch        # 0.1.0 -> 0.1.1-rc1
+# 1) Start dev cycle
+make bump-dev       # 0.1.0 -> 0.1.1-dev1
+
+# 2) Iterate as much as you like
+#    (code, commit, repeat; optionally bump to dev2, dev3, ...)
+make bump-dev       # 0.1.1-dev1 -> 0.1.1-dev2
+
+# 3) When it feels like a candidate, promote to RC
+make bump-rc        # 0.1.1-devN -> 0.1.1-rc1
+
+# 4) If you need more RCs
+make bump-rc        # 0.1.1-rc1 -> 0.1.1-rc2
+
+# 5) When done, finalise
+make bump-final     # 0.1.1-rcN -> 0.1.1
 ```
 
-3. Push; let CI / TestPyPI run.
-4. If you need more RCs:
+3. Jump straight to RC from a stable
+
+If you’re coming from a stable release and want to go directly to an RC
+(without an explicit -dev phase):
 
 ```bash
-make bump-rc              # 0.1.1-rc1 -> 0.1.1-rc2
+# From 0.1.0:
+make bump-rc        # 0.1.0 -> 0.1.1-rc1
 ```
 
-5. Once you’re happy with the RC:
-
-```bash
-make bump-final           # 0.1.1-rcN -> 0.1.1
-```
-
-6. CI publishes 0.1.1 to PyPI from tag v0.1.1.
-
-New development cycle after a final
-
-After releasing 0.1.1:
-
-```bash
-make bump-patch          # 0.1.1 -> 0.1.2-dev0
-# or:
-make bump-minor          # 0.1.1 -> 0.2.0-dev0
-# or:
-make bump-major          # 0.1.1 -> 1.0.0-dev0
-```
-
-Then iterate as -devN until you’re ready for RCs (make bump-rc).
+Then proceed with more bump-rc and finally bump-final as above.
 
 ## Do & Don’t
 
 Do:
 
-- Run make check-all before any bump.
-- Only bump on clean branches.
-- Let bump-my-version own commits + tags for version bumps.
-- Treat RCs as temporary: they should either become a final or be superseded.
+- Run make check-all before any version bump.
+- Keep the working tree clean before calling any make bump-* target.
+- Let the make targets manipulate the version fields; don’t hand-edit them.
+- Use dev builds for “ongoing work”, RC builds for “ready to test”.
 
 Don’t:
 
-- Manually edit versions in pyproject.toml or version.py except when fixing a mis-sync explicitly.
-- Create ad-hoc tags that don’t match the version in the code.
-- Reuse the same version number once it has been published to TestPyPI or PyPI.
+- Manually tweak pyproject.toml or version.py unless you are fixing a clearly broken state.
+- Reuse a version number once it has been pushed / released (even to TestPyPI).
+- Push tags that don’t match the version stored in the code.
 
-This document describes the canonical versioning & release process for this project.
-If in doubt: use the make bump-* targets instead of manual editing or tagging.
+If in doubt: **run make show-version-flow** (if present in this repo) or
+look at the current version string and follow the patterns in this document.

@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   stale:
+    name: Run Stale Issue & PR Handler
     uses: the-lupaxa-project/.github/.github/workflows/reusable-stale.yml@master
 
   status-check:

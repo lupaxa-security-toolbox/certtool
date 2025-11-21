@@ -22,6 +22,7 @@ on:
 
 jobs:
   publish-mkdocs:
+    name: Publish Mkdocs
     uses: the-lupaxa-project/.github/.github/workflows/reusable-publish-mkdocs.yml@master
     secrets: inherit
     with:

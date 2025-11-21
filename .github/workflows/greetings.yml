@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   greetings:
+    name: Run Greetings
     uses: the-lupaxa-project/.github/.github/workflows/reusable-greetings.yml@master
     secrets:
       repo-token: ${{ secrets.GITHUB_TOKEN }}

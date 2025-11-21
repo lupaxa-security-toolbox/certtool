@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   purge:
+    name: Run Purge Deprecated Workflow Runs
     uses: the-lupaxa-project/.github/.github/workflows/reusable-purge-deprecated-workflow-runs.yml@master
 
   status-check:

@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   dependabot:
+    name: Dependabot
     uses: the-lupaxa-project/.github/.github/workflows/reusable-dependabot.yml@master
     secrets: inherit
 

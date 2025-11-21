@@ -16,10 +16,12 @@ permissions:
 
 jobs:
   markdown-lint:
+    name: Markdown Lint
     uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@master
     secrets: inherit
 
   yaml-lint:
+    name: Yaml Lint
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
     secrets: inherit
 

@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write  # REQUIRED for trusted publishing
+  id-token: write
 
 jobs:
   build-and-publish:
@@ -44,6 +44,7 @@ jobs:
           verbose: true
 
   generate-release-notes:
+    name: Generate Release Notes
     uses: the-lupaxa-project/.github/.github/workflows/reusable-generate-release.yml@master
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}

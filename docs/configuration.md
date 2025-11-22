@@ -6,7 +6,7 @@ CertTool accepts configuration in JSON format for `--config` and `--config-dir` 
 
 Two main shapes are supported:
 
-### 1. Explicit `dn` / `config` Blocks
+### Explicit `dn` / `config` Blocks
 
 ```json
 {
@@ -16,8 +16,8 @@ Two main shapes are supported:
     "localityName": "Glastonbury",
     "organizationName": "The Lupaxa Project",
     "organizationalUnitName": "Security Tools",
-    "commonName": "dev.local",
-    "emailAddress": "admin@example.com"
+    "commonName": "dev.internal",
+    "emailAddress": "not-a-real-email-address@thelupaxaproject.com"
   },
   "config": {
     "digest_alg": "sha512",
@@ -27,7 +27,7 @@ Two main shapes are supported:
     "valid_days": 365
   },
   "subject_alt_names": [
-    "dev.local",
+    "dev.internal",
     "127.0.0.1"
   ],
   "passphrase": "EXAMPLE_ONLY_NOT_A_REAL_PASSWORD"
@@ -39,7 +39,7 @@ Two main shapes are supported:
 ```json
 {
   "countryName": "UK",
-  "commonName": "dev.local",
+  "commonName": "dev.internal",
   "digest_alg": "sha512",
   "private_key_bits": 2048,
   "private_key_type": "RSA",
@@ -87,8 +87,8 @@ SANs are supplied via `subject_alt_names`:
 ```json
 {
   "subject_alt_names": [
-    "dev.local",
-    "api.local",
+    "dev.internal",
+    "api.internal",
     "10.0.0.5"
   ]
 }
@@ -110,16 +110,14 @@ Private key encryption can be enabled by:
 
 Precedence:
 
-1. CLI `--passphrase` (if provided)
-2. JSON `passphrase`
-3. No passphrase → key is written unencrypted.
+CLI `--passphrase` (if provided) → JSON `passphrase` → No passphrase (key is written unencrypted)
 
 ## Validating Configs
 
 To sanity-check a config file:
 
 ```bash
-certtool --validate-config configs/example-cert.json
+certtool --validate-config configs/dev-internal-cert.json
 ```
 
 This will error out if any of the following are invalid:

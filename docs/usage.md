@@ -4,38 +4,52 @@ CertTool supports three main **generation modes**, plus two **utility modes**.
 
 ## Modes Overview
 
-1. **CLI-only mode** (no `--config` / `--config-dir`):
-   - DN (Distinguished Name) comes solely from CLI options.
-   - Config options are taken from defaults, then overridden by CLI flags.
-   - No DN defaults: `commonName` **must** be provided.
+### Generation Modes
 
-2. **Config file mode** (`--config path/to/file.json`):
-   - DN and CONFIG come from the JSON file.
-   - DN/CONFIG CLI options are **not allowed** in this mode.
+**CLI-only mode** (no `--config` / `--config-dir`):
 
-3. **Config directory mode** (`--config-dir path/to/dir/`):
-   - For each `*.json` in the directory, DN and CONFIG come from that file.
-   - DN/CONFIG CLI options are **not allowed**.
-   - Perfect for bulk generation.
+- DN (Distinguished Name) comes solely from CLI options.
+- Config options are taken from defaults, then overridden by CLI flags.
+- No DN defaults: `commonName` **must** be provided.
 
-Utility modes:
+**Config file mode** (`--config path/to/file.json`):
 
-4. **Example config generation** (`--generate-example`):
-   - Prints an example JSON config to stdout, or writes it to `--example-file`.
+- DN and CONFIG come from the JSON file.
+- DN/CONFIG CLI options are **not allowed** in this mode.
 
-5. **Config validation** (`--validate-config path/to/config.json`):
-   - Parses, merges with defaults, validates DN, key type, etc., and exits.
+**Config directory mode** (`--config-dir path/to/dir/`):
 
-6. **Certificate inspection** (`--inspect-cert path/to/cert.pem`):
-   - Prints basic details (subject, issuer, SANs, validity) about a PEM certificate.
+- For each `*.json` in the directory, DN and CONFIG come from that file.
+- DN/CONFIG CLI options are **not allowed**.
+- Perfect for bulk generation.
+
+**Using an Output Directory** (`--output-dir path/to/dir`):
+
+- For each cert created, write to the `--output-dir` directory.
+
+### Utility Modes
+
+**Example config generation** (`--generate-example`):
+
+- Prints an example JSON config to stdout, or writes it to `--example-file`.
+
+**Config validation** (`--validate-config path/to/config.json`):
+
+- Parses, merges with defaults, validates DN, key type, etc., and exits.
+
+**Certificate inspection** (`--inspect-cert path/to/cert.pem`):
+
+- Prints basic details (subject, issuer, SANs, validity) about a PEM certificate.
 
 ## Basic CLI Examples
 
-### 1. CLI-Only: Minimal DN on the command line
+### Generation Modes
+
+#### CLI-Only: Minimal DN on the command line
 
 ```bash
 certtool \
-  --common-name "test.local" \
+  --common-name "dev.internal" \
   --organization-name "The Lupaxa Project"
 ```
 
@@ -46,10 +60,10 @@ This will:
 - Create a self-signed certificate (valid for 365 days)
 - Print the cert, CSR, and key to stdout in PEM format.
 
-### 2. Using a JSON Config File
+#### Using a JSON Config File
 
 ```bash
-certtool --config configs/example-cert.json
+certtool --config configs/dev-internal-cert.json
 ```
 
 The JSON file can specify:
@@ -61,7 +75,7 @@ The JSON file can specify:
 
 See [Configuration](configuration.md) for details.
 
-### 3. Bulk Generation from a Directory
+#### Bulk Generation from a Directory
 
 ```bash
 certtool --config-dir configs/ --output-dir output/
@@ -73,28 +87,37 @@ For each `*.json` file in `configs/`, this will:
 - Place them under `output/<label>/` as `cert.pem`, `csr.pem`, `key.pem`
 - `<label>` is derived from the `commonName` (preferred) or filename.
 
-### 4. Using an Output Directory
+#### Using an Output Directory
 
 By default, PEMs are printed to stdout. To write to disk:
 
 ```bash
-certtool --config configs/example-cert.json --output-dir certs/
+certtool --config configs/dev-internal-cert.json --output-dir certs/
 ```
 
 Output will be created under:
 
 ```text
 certs/
-  example-cert/
+  dev.internal/
     cert.pem
     csr.pem
     key.pem
 ```
 
-### 5. Validate Config Only
+### Utility Modes
+
+#### Example Config Generation
 
 ```bash
-certtool --validate-config configs/example-cert.json
+certtool --generate-example
+certtool --generate-example --example-file example-cert.json
+```
+
+#### Validate Config Only
+
+```bash
+certtool --validate-config configs/dev-internal-cert.json
 ```
 
 This will:
@@ -105,10 +128,10 @@ This will:
 - Check `private_key_type` is supported (`RSA`)
 - Report success or raise an error
 
-### 6. Inspect an Existing Certificate
+### Inspect an Existing Certificate
 
 ```bash
-certtool --inspect-cert certs/example-cert/cert.pem
+certtool --inspect-cert certs/dev-internal-cert/cert.pem
 ```
 
 This prints:

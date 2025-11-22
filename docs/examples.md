@@ -2,11 +2,11 @@
 
 This page shows practical command-line and Python examples for CertTool.
 
-## 1. Generate a Single Cert from CLI
+## Generate a Single Cert from CLI
 
 ```bash
 certtool \
-  --common-name "dev.local" \
+  --common-name "dev.internal" \
   --organization-name "The Lupaxa Project" \
   --digest-alg sha256 \
   --private-key-bits 4096 \
@@ -15,14 +15,14 @@ certtool \
 
 This prints all three PEMs (cert, CSR, key) to stdout.
 
-## 2. Generate with SANs via JSON
+## Generate with SANs via JSON
 
-`configs/web-cert.json`:
+`configs/dev-internal-cert.json`:
 
 ```json
 {
   "dn": {
-    "commonName": "web.internal",
+    "commonName": "dev.internal",
     "organizationName": "The Lupaxa Project"
   },
   "config": {
@@ -33,9 +33,9 @@ This prints all three PEMs (cert, CSR, key) to stdout.
     "encrypt_key": false
   },
   "subject_alt_names": [
-    "web.internal",
+    "dev.internal",
     "api.internal",
-    "10.0.0.10"
+    "10.0.0.5"
   ]
 }
 ```
@@ -43,19 +43,19 @@ This prints all three PEMs (cert, CSR, key) to stdout.
 Command:
 
 ```bash
-certtool --config configs/web-cert.json --output-dir certs/
+certtool --config configs/dev-internal-cert.json --output-dir certs/
 ```
 
 Output:
 
 ```text
-certs/web.internal/
+certs/dev-internal-cert/
   cert.pem
   csr.pem
   key.pem
 ```
 
-## 3. Bulk Generation for Multiple Hosts
+## Bulk Generation for Multiple Hosts
 
 Layout:
 

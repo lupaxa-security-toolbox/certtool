@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Python **3.9+**
+- Python **3.10+**
 - OpenSSL libraries (provided by the `cryptography` package)
 - A POSIX-like environment is recommended, but not required.
 

@@ -136,6 +136,11 @@ filename = "pyproject.toml"
 search = 'version = "{current_version}"'
 replace = 'version = "{new_version}"'
 
+[[tool.bumpversion.files]]
+filename = "docs/version.md"
+search = 'Current version: `{current_version}`'
+replace = 'Current version: `{new_version}`'
+
 # ---------------------------------------------------------------------------
 # Ruff configuration
 # ---------------------------------------------------------------------------

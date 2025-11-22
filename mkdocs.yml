@@ -49,11 +49,13 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Version: version.md
   - Installation: installation.md
   - Usage: usage.md
   - CLI Quick Start: cli.md
   - Configuration Overview: configuration.md
   - Examples: examples.md
+  - Security: security.md
   - Reference:
       - CLI: reference/cli.md
       - Config files: reference/config.md

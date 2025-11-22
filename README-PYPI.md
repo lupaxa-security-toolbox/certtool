@@ -3,9 +3,13 @@
   <a href="https://github.com/lupaxa-security-toolbox">
     <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
   </a>
-  The Lupaxa Security Toolbox.<br />
-  Part of The Lupaxa Project.
 </p>
+<h3 align="center">
+  The Lupaxa Security Toolbox<br />
+  Part of The Lupaxa Project
+</h3>
+
+<br />
 
 # lupaxa-certtool
 
@@ -127,38 +131,6 @@ certtool --config dev-internal-cert.json --passphrase "some-secret"
 
 ```bash
 certtool --inspect-cert output/dev.interal/cert.pem
-```
-
-## Development
-
-### Run tests
-
-```bash
-make test
-```
-
-### Type checking
-
-```bash
-make type
-```
-
-### Lint, format, and style checks
-
-```bash
-make check-style
-```
-
-### Run everything
-
-```bash
-make check-all
-```
-
-### Build documentation
-
-```bash
-mkdocs serve
 ```
 
 ## Documentation

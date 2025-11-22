@@ -3,8 +3,16 @@
   <a href="https://github.com/lupaxa-security-toolbox">
     <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
   </a>
-  The Lupaxa Security Toolbox.<br />
-  Part of The Lupaxa Project.<br /><br />
+</p>
+
+<h3 align="center">
+  The Lupaxa Security Toolbox<br />
+  Part of The Lupaxa Project
+</h3>
+
+<br />
+
+<p align="center">
   <!-- Core project badges -->
   <a href="https://github.com/lupaxa-security-toolbox/certtool/actions">
     <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
@@ -171,38 +179,6 @@ certtool --config dev-internal-cert.json --passphrase "some-secret"
 
 ```bash
 certtool --inspect-cert output/dev.interal/cert.pem
-```
-
-## Development
-
-### Run tests
-
-```bash
-make test
-```
-
-### Type checking
-
-```bash
-make type
-```
-
-### Lint, format, and style checks
-
-```bash
-make check-style
-```
-
-### Run everything
-
-```bash
-make check-all
-```
-
-### Build documentation
-
-```bash
-mkdocs serve
 ```
 
 ## Documentation

@@ -12,10 +12,6 @@ It is designed for:
 - Labs, demos and PoCs
 - Quickly bootstrapping TLS for services like Apache, Nginx, or internal tools
 
-## Project Version
-
-Current version: `0.1.1`
-
 ## Features
 
 - CLI and Python API

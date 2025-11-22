@@ -27,6 +27,18 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
+copyright: |
+  <p class="lupaxa-footer">
+    <strong>&copy; The Lupaxa Project.</strong><br />
+    <em>
+      Where exploration meets precision.<br />
+      Where the untamed meets the engineered.
+    </em>
+  </p>
+
+extra:
+  generator: false
+
 # Custom CSS to inject Lupaxa colours
 extra_css:
   - css/palette.css

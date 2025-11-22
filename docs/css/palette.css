@@ -24,3 +24,36 @@
 
   --md-accent-fg-color: #203959;
 }
+
+/* Take control of the meta footer row */
+.md-footer-meta__inner {
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure the copyright block fills and centers */
+.md-footer-copyright {
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+/* Center the Lupaxa footer text lines */
+.lupaxa-footer {
+  margin: 0;
+  text-align: center !important;
+  width: 100%;
+  opacity: 0.85;
+}
+
+/* Match footer background to the header/nav primary color */
+.md-footer {
+  background-color: var(--md-primary-fg-color) !important;
+  color: var(--md-primary-bg-color) !important;
+}
+
+/* Optional: ensure the inner meta/footer text uses the right color */
+.md-footer-meta,
+.md-footer-copyright {
+  background-color: var(--md-primary-fg-color) !important;
+  color: var(--md-primary-bg-color) !important;
+}

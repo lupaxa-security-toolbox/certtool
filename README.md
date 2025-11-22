@@ -34,11 +34,21 @@
   </a>
   <br />
   <!-- Python (PyPI) -->
-  <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=blue" alt="PyPI Version"/>
+  <a href="#">
+    <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=blue" alt="PyPI Version"/>
+  </a>
+  <a href="#">
   <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  </a>
+  <a href="#">
   <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  </a>
+  <a href="#">
   <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI status" />
+  </a>
+  <a href="#">
   <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI supported python versions" />
+  </a>
 </p>
 
 # lupaxa-certtool
@@ -94,21 +104,21 @@ certtool \
   --stateOrProvinceName Somerset \
   --localityName Glastonbury \
   --organizationName "Lupaxa Project" \
-  --commonName "example.local"
-  ```
+  --commonName "dev.internal"
+```
 
 ## Using JSON Configuration
 
 ### Generate an example config
 
 ```bash
-certtool --generate-example --example-file example-cert.json
+certtool --generate-example --example-file dev-internal-cert.json
 ```
 
 ### Use a JSON config file
 
 ```bash
-certtool --config example-cert.json
+certtool --config dev-internal-cert.json
 ```
 
 ### Use a directory of configs (bulk mode)
@@ -129,7 +139,7 @@ You get:
 
 ```bash
 output/
-├── example.local/
+├── dev.internal/
 │   ├── cert.pem
 │   ├── csr.pem
 │   └── key.pem
@@ -154,13 +164,13 @@ Each certificate gets its own folder to prevent overwriting.
 ### CLI (overrides JSON)
 
 ```bash
-certtool --config server.json --passphrase "some-secret"
+certtool --config dev-internal-cert.json --passphrase "some-secret"
 ```
 
 ## Inspect a Certificate
 
 ```bash
-certtool --inspect-cert output/example.local/cert.pem
+certtool --inspect-cert output/dev.interal/cert.pem
 ```
 
 ## Development
@@ -230,38 +240,16 @@ make check-style # lint + format + type
 make check-all   # run tests, coverage, and audit
 ```
 
-## Repository Layout
-
-```bash
-lupaxa-certtool/
-├── src/lupaxa/certtool/
-│   ├── cli.py
-│   ├── certs.py
-│   ├── utils.py
-│   ├── config.py
-│   ├── example.py
-│   ├── exceptions.py
-│   ├── version.py
-│   └── __init__.py
-├── docs/
-├── tests/
-├── mkdocs.yml
-├── Makefile
-├── pyproject.toml
-├── .editorconfig
-├── .gitignore
-└── README.md
-```
-<h1></h1>
-
-<p align="center">
-    <strong>
-        &copy; The Lupaxa Project.
-    </strong>
-    <br />
-    <em>
-        Where exploration meets precision.<br />
-        Where the untamed meets the engineered.
-    </em>
-</p>
-
+<footer>
+    <h1>&nbsp;</h1>
+    <p align="center">
+        <strong>
+            &copy; The Lupaxa Project.
+        </strong>
+        <br />
+        <em>
+            Where exploration meets precision.<br />
+            Where the untamed meets the engineered.
+        </em>
+    </p>
+</footer>

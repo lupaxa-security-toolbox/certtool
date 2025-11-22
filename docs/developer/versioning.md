@@ -156,9 +156,8 @@ make bump-final     # X.Y.Z-rcN   -> X.Y.Z
                     # X.Y.Z-devN  -> X.Y.Z
 ```
 
-> [!NOTE]
->
 > Implementation detail:
+>
 > Under the hood we use bump-my-version for the core MAJOR.MINOR.PATCH
 > bumping, and lightweight text editing for the -devN / -rcN suffixes.
 > You don’t need to call bump-my-version directly - always go via make.

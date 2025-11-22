@@ -43,3 +43,17 @@ Self-signed certificates are useful for local testing, CI pipelines, and ephemer
 or trustworthiness in real-world security scenarios.
 
 For more information please refer to the [Security Guidance](security.md) documentation.
+
+<footer>
+    <h1>&nbsp;</h1>
+    <p align="center">
+        <strong>
+            &copy; The Lupaxa Project.
+        </strong>
+        <br />
+        <em>
+            Where exploration meets precision.<br />
+            Where the untamed meets the engineered.
+        </em>
+    </p>
+</footer>

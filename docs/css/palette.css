@@ -1,59 +1,99 @@
-/* Lupaxa colour palette overrides for MkDocs Material
- *
+/* ====================================================================== */
+/*  Lupaxa Colour Palette Overrides for MkDocs Material                   */
+/* ====================================================================== */
+/*
  * Brand colours:
- *   Primary (nav/logo): #111a32
- *   Secondary / accent: #203959
+ *   Primary (header/footer/nav): #203959
+ *   Accent (links/buttons/highlights): #6d95d3
+ *
+ * This stylesheet forces Material for MkDocs to use Lupaxa brand colours
+ * consistently, overriding the default "blue grey" palette.
+ *
+ * Works for:
+ *   - Light mode (default)
+ *   - Dark mode (slate)
+ *   - Header
+ *   - Navigation tabs
+ *   - Footer (all nested elements)
+ *   - Custom footer content (.lupaxa-footer)
  */
 
-/* Default (light) scheme */
+/* ---------------------------------------------------------------------- */
+/*  Light mode (default scheme)                                           */
+/* ---------------------------------------------------------------------- */
 :root {
-  /* Primary brand colour (header, active nav, etc.) */
-  --md-primary-fg-color: #111a32;
-  --md-primary-fg-color--light: #203959;
+  /* Primary brand colour */
+  --md-primary-fg-color: #203959;
+  --md-primary-fg-color--light: #6d95d3;
   --md-primary-fg-color--dark: #0b1222;
 
-  /* Accent colour (links, buttons, highlights) */
-  --md-accent-fg-color: #203959;
+  /* Accent colour */
+  --md-accent-fg-color: #6d95d3;
 }
 
-/* Dark / slate scheme */
+/* ---------------------------------------------------------------------- */
+/*  Dark mode (slate scheme)                                              */
+/* ---------------------------------------------------------------------- */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #111a32;
-  --md-primary-fg-color--light: #203959;
+  --md-primary-fg-color: #203959;
+  --md-primary-fg-color--light: #6d95d3;
   --md-primary-fg-color--dark: #050812;
 
-  --md-accent-fg-color: #203959;
+  --md-accent-fg-color: #6d95d3;
 }
 
-/* Take control of the meta footer row */
-.md-footer-meta__inner {
-  display: flex;
-  justify-content: center;
+/* ====================================================================== */
+/*  FORCE HEADER + NAV BAR TO EXACT BRAND COLOUR                          */
+/* ====================================================================== */
+
+.md-header,
+.md-header-nav,
+.md-tabs {
+  background-color: #203959 !important;
+  color: #ffffff !important;
 }
 
-/* Ensure the copyright block fills and centers */
+/* ====================================================================== */
+/*  FOOTER OVERRIDES (force exact brand colour everywhere)                */
+/* ====================================================================== */
+
+/* Footer background + text */
+.md-footer,
+.md-footer-meta,
+.md-footer-meta__inner,
 .md-footer-copyright {
-  flex: 0 1 auto;
-  text-align: center;
+  background-color: #203959 !important;
+  color: #ffffff !important;
 }
 
-/* Center the Lupaxa footer text lines */
-.lupaxa-footer {
+/* Footer inner container alignment */
+.md-footer-meta__inner {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Lupaxa footer text block */
+.md-footer-copyright .lupaxa-footer {
   margin: 0;
-  text-align: center !important;
   width: 100%;
+  text-align: center !important;
+  color: #ffffff !important;
   opacity: 0.85;
 }
 
-/* Match footer background to the header/nav primary color */
-.md-footer {
-  background-color: var(--md-primary-fg-color) !important;
-  color: var(--md-primary-bg-color) !important;
+/* Force each line of the Lupaxa footer text to center */
+.lupaxa-footer {
+  text-align: center !important;
+  width: 100%;
+  margin: 0;
 }
 
-/* Optional: ensure the inner meta/footer text uses the right color */
-.md-footer-meta,
-.md-footer-copyright {
-  background-color: var(--md-primary-fg-color) !important;
-  color: var(--md-primary-bg-color) !important;
+/* Optional: footer links (if you ever add them)
+.md-footer a {
+  color: #ffffff !important;
 }
+*/
+
+/* ====================================================================== */
+/*  END OF FILE                                                            */
+/* ====================================================================== */

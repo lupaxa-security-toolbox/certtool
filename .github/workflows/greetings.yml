@@ -18,7 +18,7 @@ permissions:
 jobs:
   greetings:
     name: Greetings
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-greetings.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-greetings.yml@master
     secrets:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -28,4 +28,4 @@ jobs:
       - greetings
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master

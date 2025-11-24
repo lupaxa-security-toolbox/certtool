@@ -50,7 +50,7 @@ jobs:
 
   generate-release-notes:
     name: Generate Release Notes
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-generate-release.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-generate-release.yml@master
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,4 +61,5 @@ jobs:
       - generate-release-notes
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
+

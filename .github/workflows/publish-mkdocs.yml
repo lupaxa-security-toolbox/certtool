@@ -24,7 +24,7 @@ on:
 jobs:
   publish-mkdocs:
     name: Publish Mkdocs
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-publish-mkdocs.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-publish-mkdocs.yml@master
     secrets: inherit
     with:
       python-version: "3.13"
@@ -36,4 +36,4 @@ jobs:
       - publish-mkdocs
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master

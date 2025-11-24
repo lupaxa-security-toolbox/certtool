@@ -25,7 +25,7 @@ permissions:
 jobs:
   ensure-sha-pinned:
     name: Ensure SHA-Pinned GitHub Actions
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
 
   status-check:
     name: Security Hardening Status
@@ -33,4 +33,4 @@ jobs:
       - ensure-sha-pinned
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master

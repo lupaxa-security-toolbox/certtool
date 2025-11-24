@@ -19,7 +19,7 @@ permissions:
 jobs:
   python-ci:
     name: Lint & Test
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-python-make-ci.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-python-make-ci.yml@master
     secrets: inherit
 
   status-check:
@@ -28,4 +28,4 @@ jobs:
       - python-ci
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master

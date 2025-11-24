@@ -6,15 +6,14 @@ on:
       - "dependabot/"
     paths-ignore:
       - "**/*.md"
-      - "**/*.yml"
   pull_request:
     branches:
       - "**"
     paths-ignore:
       - "**/*.md"
-      - "**/*.yml"
   schedule:
     - cron: "4 3 * * 1"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -27,7 +26,7 @@ permissions:
 
 jobs:
   codeql:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-codeql.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-codeql.yml@master
     with:
       languages: "python"
 
@@ -37,4 +36,4 @@ jobs:
       - codeql
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master

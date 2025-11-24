@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
   actions: write
+  contents: read
 
 jobs:
   purge:

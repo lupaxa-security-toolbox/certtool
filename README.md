@@ -18,44 +18,44 @@
     <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=Latest%20Release" alt="Latest Release"/>
+    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=Released" alt="Release Date"/>
+    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?style=for-the-badge&color=blue" alt="Commits Since Release"/>
+    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
   </a>
   <br/>
   <!-- Community & ecosystem badges -->
   <a href="https://github.com/lupaxa-security-toolbox/certtool/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Contributors"/>
+    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Contributors"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/issues">
-    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Issues"/>
+    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Issues"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
-    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue" alt="Open Pull Requests"/>
+    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE.md">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=blue&label=License" alt="License"/>
+    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=License" alt="License"/>
   </a>
   <br />
   <!-- Python (PyPI) -->
   <a href="#">
-    <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=blue" alt="PyPI Version"/>
+    <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=203959" alt="PyPI Version"/>
   </a>
   <a href="#">
-  <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI downloads" />
   </a>
   <a href="#">
-  <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI downloads" />
+  <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI downloads" />
   </a>
   <a href="#">
-  <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI status" />
+  <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI status" />
   </a>
   <a href="#">
-  <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=blue" alt="PyPI supported python versions" />
+  <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI supported python versions" />
   </a>
 </p>
 

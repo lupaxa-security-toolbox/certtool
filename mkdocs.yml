@@ -16,7 +16,6 @@ theme:
     - navigation.indexes
     - toc.integrate
     - content.code.copy
-    - content.action.edit
   palette:
     - scheme: default
       primary: custom

@@ -1,4 +1,4 @@
-name: Generate Mkdocs
+name: Publish Mkdocs
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

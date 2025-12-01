@@ -1,4 +1,4 @@
-name: Documentation Lint (Markdown + YAML)
+name: Documentation Lint
 
 on:
   push:

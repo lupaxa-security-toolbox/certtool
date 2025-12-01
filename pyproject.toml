@@ -127,19 +127,35 @@ post_commit_hooks = [
 # Files where versions are updated
 [[tool.bumpversion.files]]
 filename = "src/lupaxa/certtool/version.py"
-search = '__version__ = "{current_version}"'
+search = '^__version__ = "{current_version}"$'
 replace = '__version__ = "{new_version}"'
+use_regex = true
 
-# update version AND current_verison in this file
+# update version in this file
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
-search = 'version = "{current_version}"'
+search = '^version = "{current_version}"$'
 replace = 'version = "{new_version}"'
+use_regex = true
+
+# update current_verison in this file
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = '^current_version = "{current_version}"$'
+replace = 'version = "{new_version}"'
+use_regex = true
 
 [[tool.bumpversion.files]]
 filename = "docs/version.md"
-search = 'Current version: `{current_version}`'
+search = '^Current version: `{current_version}`$'
 replace = 'Current version: `{new_version}`'
+use_regex = true
+
+[[tool.bumpversion.files]]
+filename = "CITATION.cff"
+search = '^version: "{current_version}"$'
+replace = 'version: "{new_version}"'
+use_regex = true
 
 # ---------------------------------------------------------------------------
 # Ruff configuration

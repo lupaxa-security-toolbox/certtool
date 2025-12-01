@@ -1,4 +1,4 @@
-name: Security Hardening (Ensure SHA-Pinned Actions)
+name: Ensure SHA-Pinned Actions
 
 on:
   pull_request:

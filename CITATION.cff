@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+
+title: "The Lupaxa Security Toolbox: certtool"
+version: "0.1.1"
+
+authors:
+  - family-names: "The Lupaxa Project"
+
+abstract: >
+  A clean, modern, fully-typed Python CLI and library for generating self-signed X.509 certificates, certificate signing requests (CSRs), and private keys.
+
+keywords:
+  - lupaxa
+  - the-lupaxa-project
+  - security
+  - certificates
+
+license: "MIT"
+
+repository-code: "https://github.com/lupaxa-security-toolbox/certtool"
+url: "https://github.com/lupaxa-security-toolbox/certtool"
+
+preferred-citation:
+  type: software
+  title: "The Lupaxa Security Toolbox: certtool"
+  authors:
+    - family-names: "The Lupaxa Project"
+  year: 2025
+  url: "https://github.com/lupaxa-security-toolbox/certtool"

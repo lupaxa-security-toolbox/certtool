@@ -1,4 +1,4 @@
-name: Dependabot Automation (Approve, Comment, Merge)
+name: Dependabot
 
 on:
   pull_request:

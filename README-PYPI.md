@@ -139,7 +139,7 @@ The project includes MkDocs documentation.
 
 ### Online documentation:
 
-[Documentation](https://lupaxa-security-toolbox.github.io/certtool/)
+[Documentation](https://certtool.thelupaxaproject.org/)
 
 Full documentation is available in the docs/ directory or served locally:
 

@@ -1,17 +1,17 @@
-name: Publish MkDocs
+name: Link Checker
 
 on:
   push:
-    branches:
-      - master
     paths:
-      - ".github/workflows/publish-mkdocs.yml"
-      - "mkdocs/**"
-      - "mkdocs.yml"
-      - "overrides/**"
-      - "requirements.txt"
+      - ".github/workflows/link-checker.yml"
+      - "**/*.md"
 
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/link-checker.yml"
+      - "**/*.md"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,23 +20,17 @@ concurrency:
 permissions:
   actions: read
   contents: read
-  deployments: write
-  id-token: write
-  pages: write
 
 jobs:
-  publish-mkdocs:
-    name: Publish MkDocs
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-mkdocs-site-publisher.yml@master
+  link-checker:
+    name: Link Checker
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-link-checker.yml@master
     secrets: inherit
-    with:
-      python-version: "3.13"
-      cleanup: true
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - publish-mkdocs
+      - link-checker
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 

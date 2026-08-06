@@ -1,10 +1,18 @@
-name: Publish to PyPI
+name: Generate Release
+
+# Makefile mapping (bump-my-version tag v{version}):
+#   stable X.Y.Z  → this workflow (published release)
+#   X.Y.Z-rcN     → generate-test-release.yml (prerelease)
+#   X.Y.Z-devN    → no release workflow
+#   X.Y.Z-draftN  → generate-draft-release.yml (GitHub draft; not from Make)
 
 on:
   push:
     tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'            # final releases
-      - '!v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'  # exclude RC prereleases
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - '!v[0-9]+.[0-9]+.[0-9]+-dev[0-9]+'
+      - '!v[0-9]+.[0-9]+.[0-9]+-draft[0-9]+'
+      - '!v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
   workflow_dispatch:
 
 concurrency:
@@ -50,29 +58,28 @@ jobs:
 
   generate-release-notes:
     name: Generate Release Notes
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-generate-release.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-github-release-generator.yml@master
+    with:
+      draft: false
+      prerelease: false
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  status-check:
-    name: Generate Release Status
+  generate-workflow-summary:
+    name: Generate Workflow Summary
     needs:
       - build-and-publish
       - generate-release-notes
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 
-  slack-workflow-status:
-    name: Slack Workflow Status
+  generate-workflow-notifications:
+    name: Generate Workflow Notifications
     needs:
-      - status-check
+      - generate-workflow-summary
     if: always()
-
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-notifier.yml@master
     with:
       notify_on_results: "failure,timed_out"
-      ignore_jobs: "Check Jobs Status"
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-

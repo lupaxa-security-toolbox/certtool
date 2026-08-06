@@ -37,7 +37,7 @@
   <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
     <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE.md">
+  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=License" alt="License"/>
   </a>
   <br />
@@ -187,9 +187,9 @@ The project includes MkDocs documentation.
 
 ### Online documentation:
 
-[Documentation](https://lupaxa-security-toolbox.github.io/certtool/)
+[Documentation](https://certtool.thelupaxaproject.org/)
 
-Full documentation is available in the docs/ directory or served locally:
+Full documentation is available in the `mkdocs/` directory or served locally:
 
 ### Serve docs locally
 

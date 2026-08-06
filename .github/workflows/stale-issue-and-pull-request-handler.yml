@@ -1,15 +1,8 @@
-name: Publish MkDocs
+name: Stale Issue & Pull Request Handler
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - ".github/workflows/publish-mkdocs.yml"
-      - "mkdocs/**"
-      - "mkdocs.yml"
-      - "overrides/**"
-      - "requirements.txt"
+  schedule:
+    - cron: "35 5 * * *"
 
   workflow_dispatch:
 
@@ -20,23 +13,18 @@ concurrency:
 permissions:
   actions: read
   contents: read
-  deployments: write
-  id-token: write
-  pages: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  publish-mkdocs:
-    name: Publish MkDocs
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-mkdocs-site-publisher.yml@master
-    secrets: inherit
-    with:
-      python-version: "3.13"
-      cleanup: true
+  stale-issue-and-pull-request-handler:
+    name: Run Stale Issue & PR Handler
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-stale-issue-and-pull-request-handler.yml@master
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - publish-mkdocs
+      - stale-issue-and-pull-request-handler
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 

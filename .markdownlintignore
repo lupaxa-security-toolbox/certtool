@@ -1,7 +1,3 @@
-# Common noise you don't want linted
-node_modules/
-dist/
-build/
-vendor/
-**/.venv/
-**/__pycache__/
+# Generated / local-only — not part of the published site
+site/
+cursor-docs/

@@ -1,17 +1,21 @@
-name: Publish MkDocs
+name: YAML Linter
 
 on:
   push:
-    branches:
-      - master
     paths:
-      - ".github/workflows/publish-mkdocs.yml"
-      - "mkdocs/**"
-      - "mkdocs.yml"
-      - "overrides/**"
-      - "requirements.txt"
+      - ".github/workflows/yaml-linter.yml"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - ".yamllint.yml"
 
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/yaml-linter.yml"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - ".yamllint.yml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,23 +24,17 @@ concurrency:
 permissions:
   actions: read
   contents: read
-  deployments: write
-  id-token: write
-  pages: write
 
 jobs:
-  publish-mkdocs:
-    name: Publish MkDocs
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-mkdocs-site-publisher.yml@master
+  yaml-linter:
+    name: YAML Linter
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-yaml-linter.yml@master
     secrets: inherit
-    with:
-      python-version: "3.13"
-      cleanup: true
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - publish-mkdocs
+      - yaml-linter
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 

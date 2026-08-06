@@ -204,3 +204,7 @@ docker-compose.override.yml
 git-*.sh
 *.diff
 *.patch
+
+# Private Superpowers specs/plans (symlink into Lupaxa cursor-docs vault)
+cursor-docs
+.cursor/

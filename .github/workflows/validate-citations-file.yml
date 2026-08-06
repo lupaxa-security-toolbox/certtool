@@ -6,11 +6,13 @@ on:
       - 'dependabot/**'
     paths:
       - 'CITATION.cff'
+      - '.github/workflows/validate-citations-file.yml'
   pull_request:
     branches:
-      - '**'
+      - 'master'
     paths:
       - 'CITATION.cff'
+      - '.github/workflows/validate-citations-file.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -26,23 +28,20 @@ jobs:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-validate-citations-file.yml@master
     secrets: inherit
 
-  status-check:
-    name: Check Jobs Status
+  generate-workflow-summary:
+    name: Generate Workflow Summary
     needs:
       - validate
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 
-  slack-workflow-status:
-    name: Slack Workflow Status
+  generate-workflow-notifications:
+    name: Generate Workflow Notifications
     needs:
-      - status-check
+      - generate-workflow-summary
     if: always()
-
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-notifier.yml@master
     with:
       notify_on_results: "failure,timed_out"
-      ignore_jobs: "Check Jobs Status"
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

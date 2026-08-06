@@ -1,17 +1,13 @@
-name: Publish MkDocs
+name: First-Time Contributor Greetings
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - ".github/workflows/publish-mkdocs.yml"
-      - "mkdocs/**"
-      - "mkdocs.yml"
-      - "overrides/**"
-      - "requirements.txt"
+  pull_request:
+    types: [opened]
+    branches-ignore:
+      - 'dependabot/**'
 
-  workflow_dispatch:
+  issues:
+    types: [opened]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,23 +16,20 @@ concurrency:
 permissions:
   actions: read
   contents: read
-  deployments: write
-  id-token: write
-  pages: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  publish-mkdocs:
-    name: Publish MkDocs
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-mkdocs-site-publisher.yml@master
-    secrets: inherit
-    with:
-      python-version: "3.13"
-      cleanup: true
+  first-time-contributor-greeting:
+    name: First-Time Contributor Greetings
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-first-time-contributor-greetings.yml@master
+    secrets:
+      repo-token: ${{ secrets.GITHUB_TOKEN }}
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - publish-mkdocs
+      - first-time-contributor-greeting
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 

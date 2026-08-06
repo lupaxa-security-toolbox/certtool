@@ -7,7 +7,7 @@ name = "lupaxa-certtool"
 version = "0.1.1"
 description = "A Python toolkit and CLI for generating self-signed certificates, CSRs, and private keys."
 readme = "README-PYPI.md"
-license = { file = "LICENSE.md" }
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
 
 authors = [
@@ -41,7 +41,7 @@ classifiers = [
 # ------------------------------------------------------------
 [project.urls]
 Homepage = "https://github.com/lupaxa-security-toolbox/certtool"
-Documentation = "https://lupaxa-security-toolbox.github.io/certtool/"
+Documentation = "https://certtool.thelupaxaproject.org/"
 Repository = "https://github.com/lupaxa-security-toolbox/certtool"
 Issues = "https://github.com/lupaxa-security-toolbox/certtool/issues"
 
@@ -59,8 +59,8 @@ dev = [
   "types-setuptools",
   "bump-my-version>=1.2.0",
   "pip-audit>=2.7.0",
-  "mkdocs>=1.6.0",
-  "mkdocs-material>=9.5.0",
+  "mkdocs==1.6.1",
+  "mkdocs-material==9.7.7",
 ]
 test = [
   "pytest>=8.0",
@@ -146,7 +146,7 @@ replace = 'version = "{new_version}"'
 use_regex = true
 
 [[tool.bumpversion.files]]
-filename = "docs/version.md"
+filename = "mkdocs/version.md"
 search = '^Current version: `{current_version}`$'
 replace = 'Current version: `{new_version}`'
 use_regex = true

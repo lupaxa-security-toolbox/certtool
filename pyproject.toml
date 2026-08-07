@@ -151,12 +151,6 @@ search = '^Current version: `{current_version}`$'
 replace = 'Current version: `{new_version}`'
 use_regex = true
 
-[[tool.bumpversion.files]]
-filename = "CITATION.cff"
-search = '^version: "{current_version}"$'
-replace = 'version: "{new_version}"'
-use_regex = true
-
 # ---------------------------------------------------------------------------
 # Ruff configuration
 # ---------------------------------------------------------------------------

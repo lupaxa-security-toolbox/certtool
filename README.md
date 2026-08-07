@@ -1,65 +1,8 @@
-<!-- markdownlint-disable -->
 <p align="center">
   <a href="https://github.com/lupaxa-security-toolbox">
-    <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/security-toolbox/readme-logo.png" alt="Developers Toolbox" />
   </a>
 </p>
-
-<h3 align="center">
-  The Lupaxa Security Toolbox<br />
-  Part of The Lupaxa Project
-</h3>
-
-<br />
-
-<p align="center">
-  <!-- Core project badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
-  </a>
-  <br/>
-  <!-- Community & ecosystem badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Contributors"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/issues">
-    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Issues"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
-    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=License" alt="License"/>
-  </a>
-  <br />
-  <!-- Python (PyPI) -->
-  <a href="#">
-    <img src="https://img.shields.io/pypi/v/smartcache?style=for-the-badge&color=203959" alt="PyPI Version"/>
-  </a>
-  <a href="#">
-  <img src="https://img.shields.io/pypi/dm/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI downloads" />
-  </a>
-  <a href="#">
-  <img src="https://img.shields.io/pepy/dt/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI downloads" />
-  </a>
-  <a href="#">
-  <img src="https://img.shields.io/pypi/status/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI status" />
-  </a>
-  <a href="#">
-  <img src="https://img.shields.io/pypi/pyversions/lupaxa-certtool?style=for-the-badge&color=203959" alt="PyPI supported python versions" />
-  </a>
-</p>
-
-# lupaxa-certtool
 
 A clean, modern, fully-typed Python CLI and library for generating **self-signed X.509 certificates**, **certificate signing requests (CSRs)**, and **private keys**.
 
@@ -67,26 +10,26 @@ Built for automation, reproducibility, and bulk-generation workflows used by The
 
 ## Features
 
-- Generate **self-signed certificates**, **private keys**, and **CSRs**
-- Generate from:
-  - **JSON config file**
-  - **Directory of config files** (bulk mode)
-  - **Pure command-line flags**
-- Output:
-  - To **stdout**
-  - Or into an **output directory**, with one folder per certificate
-- Supports:
-  - RSA key generation
-  - SHA-256 / SHA-384 / SHA-512 digests
-  - Validity period configuration
-  - Optional **private key encryption** with passphrase
-  - **Subject Alternative Names (SANs)** via JSON or CLI
-- Includes:
-  - `--generate-example` to produce a full example JSON config
-  - `--inspect-cert` to analyze existing PEM certificates
-  - `--validate-config` to validate config files before use
-- Fully typed, linted, formatted, and tested
-- MkDocs documentation included
+-   Generate **self-signed certificates**, **private keys**, and **CSRs**
+-   Generate from:
+    - **JSON config file**
+    - **Directory of config files** (bulk mode)
+    - **Pure command-line flags**
+-   Output:
+    - To **stdout**
+    - Or into an **output directory**, with one folder per certificate
+-   Supports:
+    - RSA key generation
+    - SHA-256 / SHA-384 / SHA-512 digests
+    - Validity period configuration
+    - Optional **private key encryption** with passphrase
+    - **Subject Alternative Names (SANs)** via JSON or CLI
+-   Includes:
+    - `--generate-example` to produce a full example JSON config
+    - `--inspect-cert` to analyze existing PEM certificates
+    - `--validate-config` to validate config files before use
+-   Fully typed, linted, formatted, and tested
+-   MkDocs documentation included
 
 ## Installation
 
@@ -197,7 +140,7 @@ Full documentation is available in the `mkdocs/` directory or served locally:
 mkdocs serve
 ```
 
-Then open the printed URL (usually http://127.0.0.1:8000/) in your browser.
+Then open the printed URL (usually `http://127.0.0.1:8000/`) in your browser.
 
 ## Development
 
@@ -216,16 +159,6 @@ make check-style # lint + format + type
 make check-all   # run tests, coverage, and audit
 ```
 
-<footer>
-    <h1>&nbsp;</h1>
-    <p align="center">
-        <strong>
-            &copy; The Lupaxa Project.
-        </strong>
-        <br />
-        <em>
-            Where exploration meets precision.<br />
-            Where the untamed meets the engineered.
-        </em>
-    </p>
-</footer>
+<a href="https://github.com/the-lupaxa-project">
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/components/footer-for-child-orgs.svg" alt="The Lupaxa Project Footer" width="100%" />
+</a>

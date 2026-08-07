@@ -149,7 +149,7 @@ Full documentation is available in the docs/ directory or served locally:
 mkdocs serve
 ```
 
-Then open the printed URL (usually http://127.0.0.1:8000/) in your browser.
+Then open the printed URL (usually `http://127.0.0.1:8000/`) in your browser.
 
 ## Development
 

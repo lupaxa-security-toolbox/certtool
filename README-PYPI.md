@@ -1,7 +1,7 @@
 <!-- markdownlint-disable -->
 <p align="center">
   <a href="https://github.com/lupaxa-security-toolbox">
-    <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
   </a>
 </p>
 <h3 align="center">
@@ -149,7 +149,7 @@ Full documentation is available in the docs/ directory or served locally:
 mkdocs serve
 ```
 
-Then open the printed URL (usually `http://127.0.0.1:8000/`) in your browser.
+Then open the local URL printed by MkDocs in your browser.
 
 ## Development
 

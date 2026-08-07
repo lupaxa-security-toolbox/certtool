@@ -74,12 +74,12 @@ replace = 'current_version = "{new_version}"'
 The project uses a small set of make targets that encapsulate all the logic.
 Conceptually, they behave as follows:
 
-1. Base SemVer bumps (no pre-release suffix):
-    - bump-patch : X.Y.Z → X.Y.(Z+1)
-    - bump-minor : X.Y.Z → X.(Y+1).0
-    - bump-major : X.Y.Z → (X+1).0.0
+1.   Base SemVer bumps (no pre-release suffix):
+     - bump-patch : X.Y.Z → X.Y.(Z+1)
+     - bump-minor : X.Y.Z → X.(Y+1).0
+     - bump-major : X.Y.Z → (X+1).0.0
 
-2. Development snapshots:
+2.   Development snapshots:
 
 Use this when you want to mark “work in progress” snapshots but don’t want
 to commit to an RC yet.
@@ -90,12 +90,12 @@ make bump-dev
 
 Behaviour:
 
-- If current version is stable:
-  - X.Y.Z → X.Y.(Z+1)-dev1
-- If current version is already dev:
-  - X.Y.Z-devN → X.Y.Z-dev(N+1)
-- If current version is rc:
-  - X.Y.Z-rcN → error (you should either go to final or bump the patch first)
+-   If current version is stable:
+    - X.Y.Z → X.Y.(Z+1)-dev1
+-   If current version is already dev:
+    - X.Y.Z-devN → X.Y.Z-dev(N+1)
+-   If current version is rc:
+    - X.Y.Z-rcN → error (you should either go to final or bump the patch first)
 
 3. Release candidates:
 
@@ -108,13 +108,13 @@ make bump-rc
 
 Behaviour:
 
-- If current version is dev:
-  - X.Y.Z-devN → X.Y.Z-rc1
-(drops the dev suffix and starts RCs for that same version)
-- If current version is rc:
-  - X.Y.Z-rcN → X.Y.Z-rc(N+1)
-- If current version is stable:
-  - X.Y.Z → X.Y.(Z+1)-rc1 (bumps patch and starts RCs for the next patch)
+-   If current version is dev:
+    -   X.Y.Z-devN → X.Y.Z-rc1
+        (drops the dev suffix and starts RCs for that same version)
+-   If current version is rc:
+    - X.Y.Z-rcN → X.Y.Z-rc(N+1)
+-   If current version is stable:
+    - X.Y.Z → X.Y.(Z+1)-rc1 (bumps patch and starts RCs for the next patch)
 
 4. Final releases:
 
@@ -126,11 +126,11 @@ make bump-final
 
 Behaviour:
 
-- If current version is X.Y.Z-rcN → X.Y.Z
-  - (drops the RC suffix and finalises the version)
-- If current version is X.Y.Z-devN → X.Y.Z
-  - (drops the dev suffix and finalises, though this should be rare in practice)
-- If current version is already X.Y.Z → no-op / error
+-   If current version is X.Y.Z-rcN → X.Y.Z
+    - (drops the RC suffix and finalises the version)
+-   If current version is X.Y.Z-devN → X.Y.Z
+    - (drops the dev suffix and finalises, though this should be rare in practice)
+-   If current version is already X.Y.Z → no-op / error
 
 ## Make targets summary
 

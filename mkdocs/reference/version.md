@@ -4,8 +4,8 @@ Version information helpers.
 
 ## Functions
 
-- `get_version() -> str`  
-  Return the current version string embedded in `__version__`.
+-   `get_version() -> str`  
+    Return the current version string embedded in `__version__`.
 
 The package also exposes `version()` via the public API:
 

@@ -32,12 +32,12 @@ no protection against man-in-the-middle attacks in production systems.
 
 In secure deployments, always:
 
-- Use certificates issued by a trusted Certificate Authority (CA)<br />
-  (public CA for internet-facing systems, or a properly managed private CA within your organisation).
-- Protect private keys with strict file permissions and rotate them regularly.
-- Avoid re-using development certificates or keys on production hosts.
-- Validate certificate chains, expiration dates, key sizes, and signature algorithms as part of your CI/CD or deployment process.
-- Ensure that TLS configurations follow modern hardening guidance (e.g., current Mozilla or OWASP recommendations).
+-   Use certificates issued by a trusted Certificate Authority (CA)<br />
+    (public CA for internet-facing systems, or a properly managed private CA within your organisation).
+-   Protect private keys with strict file permissions and rotate them regularly.
+-   Avoid re-using development certificates or keys on production hosts.
+-   Validate certificate chains, expiration dates, key sizes, and signature algorithms as part of your CI/CD or deployment process.
+-   Ensure that TLS configurations follow modern hardening guidance (e.g., current Mozilla or OWASP recommendations).
 
 Self-signed certificates are useful for local testing, CI pipelines, and ephemeral environments — but they provide no assurance of identity
 or trustworthiness in real-world security scenarios.

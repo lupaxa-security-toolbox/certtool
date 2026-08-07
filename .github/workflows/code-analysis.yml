@@ -45,7 +45,8 @@ jobs:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-code-analysis.yml@master
     with:
       languages: "python"
-    secrets: inherit
+    secrets:
+      SLACK_CODEQL_WEBHOOK_URL: ${{ secrets.SLACK_CODEQL_WEBHOOK_URL }}
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:

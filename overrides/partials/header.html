@@ -39,12 +39,26 @@
       <ul class="lupaxa-header__nav-list">
         {% for nav_item in nav %}
           {# Sections have url=None; link to the first child (section index). #}
+          {# data-nav-paths use site-root paths (not page-relative) so instant #}
+          {# navigation keeps the correct active item on every page. #}
+          {% set ns = namespace(paths=[]) %}
+          {% if nav_item.url %}
+            {% set _ = ns.paths.append(nav_item.url) %}
+          {% endif %}
+          {% if nav_item.children %}
+            {% for child in nav_item.children %}
+              {% if child.url %}
+                {% set _ = ns.paths.append(child.url) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
           <li
             class="lupaxa-header__nav-item{% if nav_item.active %} lupaxa-header__nav-item--active{% endif %}"
           >
             <a
               class="lupaxa-header__nav-link"
               href="{% if nav_item.url %}{{ nav_item.url | url }}{% elif nav_item.children %}{{ nav_item.children[0].url | url }}{% else %}{{ '' | url }}{% endif %}"
+              data-nav-paths="{{ ns.paths | join(' ') }}"
               {% if nav_item.active %}aria-current="page"{% endif %}
             >
               {{ nav_item.title }}

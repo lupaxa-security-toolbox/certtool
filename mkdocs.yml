@@ -19,9 +19,8 @@ extra:
   # Hide left site nav (header already lists pages); keep on-this-page TOC.
   # Default when omitted: false (left nav visible).
   hide_primary_sidebar: false
-  # Optional short label for the header GitHub link.
-  # If omitted, uses the repo segment of repo_name (org/repo → repo).
-  # repo_display_name: CertTool
+  # Short label for the header GitHub link (avoids org/repo crowding).
+  repo_display_name: certtool
   # Footer (rendered by overrides/partials/copyright.html; year set in-browser).
   start_year: 2025
   footer_name: The Lupaxa Project
@@ -100,11 +99,12 @@ plugins:
 
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Usage: usage.md
-  - CLI Quick Start: cli.md
-  - Configuration Overview: configuration.md
-  - Examples: examples.md
+  - Install: installation.md
+  - Usage:
+      - Overview: usage.md
+      - CLI: cli.md
+      - Examples: examples.md
+  - Config: configuration.md
   - Security: security.md
   - Reference:
       - CLI: reference/cli.md
@@ -114,9 +114,6 @@ nav:
       - Exceptions: reference/exceptions.md
       - Utils: reference/utils.md
       - Versioning: reference/version.md
-  - Development:
-      - Versioning & Releases: developer/versioning.md
-  - Version: version.md
 
 markdown_extensions:
   - abbr

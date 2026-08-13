@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/images/logo.png" alt="Lupaxa CertTool logo" width="400" />
+</p>
+
 # Lupaxa CertTool
 
 `lupaxa-certtool` is a small, security-focused utility for generating **self-signed X.509 certificates**,

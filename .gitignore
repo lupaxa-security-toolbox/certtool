@@ -1,20 +1,19 @@
-###############################################################################
-# LUPAXA STANDARD .gitignore
-# Sensible defaults for Python + tooling + docs, without being over the top.
-###############################################################################
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-###############################################################################
-# Python bytecode / cache
-###############################################################################
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
+# Cursor
+.cursor/
+cursor-docs
 
-###############################################################################
-# Build & packaging outputs
-###############################################################################
+# Build
 build/
 dist/
 wheelhouse/
@@ -24,20 +23,51 @@ wheelhouse/
 pip-wheel-metadata/
 .eggs/
 
-###############################################################################
-# Virtual environments
-###############################################################################
-venv/
-.env/
-.venv/
-env/
-ENV/
-.conda/
-.python-version  # pyenv / asdf local version file
+# Certificate
+*.pem
+*.der
+*.csr
+*.key
+*.crt
+*.pfx
+*.cer
+*.jwk
+*.keystore
+certs*/
+keys*/
+output*/
+generated*/
 
-###############################################################################
-# Hatch, Poetry, Pipenv, PDM, Rye, etc.
-###############################################################################
+# Docker
+docker/
+docker-compose.override.yml
+
+# Documentation
+docs/_build/
+docs/build/
+docs/.cache/
+docs/.benchmarks/
+site/
+
+# Editors
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+*.autosave
+
+# Git
+git-*.sh
+*.diff
+*.patch
+
+# Hatch
 .hatch/
 .poetry/
 pipenv-files/
@@ -45,10 +75,40 @@ pdm.lock
 pdm.toml
 rye.lock
 
-###############################################################################
-# Secrets, credentials, tokens, auth files
-###############################################################################
-# Keep this focused so we don’t explode on every directory name.
+# Local
+*.local
+*.override
+*.user
+*.machine
+config.local.*
+settings.local.*
+
+# Logs
+*.log
+*.audit
+*.trace
+*.out
+*.err
+*.dump
+*.stackdump
+*.core
+core.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+venv/
+.env/
+.venv/
+env/
+ENV/
+.conda/
+.python-version
+
+# Secrets
 *.env
 *.env.*
 .envrc
@@ -61,114 +121,7 @@ vault.json
 *.asc
 *.pgp
 
-###############################################################################
-# Certificate / key outputs (runtime artefacts, not source)
-###############################################################################
-*.pem
-*.der
-*.csr
-*.key
-*.crt
-*.pfx
-*.cer
-*.jwk
-*.keystore
-
-# Common output dirs for generated certs/keys
-certs*/
-keys*/
-output*/
-generated*/
-
-###############################################################################
-# Logs, dumps, traces
-###############################################################################
-*.log
-*.audit
-*.trace
-*.out
-*.err
-*.dump
-*.stackdump
-*.core
-core.*
-
-###############################################################################
-# Test artefacts and temporary test outputs
-###############################################################################
-tests/tmp*/
-tests/output*/
-tests/**/assets*/
-coverage.xml
-htmlcov/
-.coverage*
-.nox/
-.tox/
-
-###############################################################################
-# Tooling caches: Ruff, mypy, pytest, pip, coverage, etc.
-###############################################################################
-.ruff_cache/
-.mypy_cache/
-.pytest_cache/
-.cache/
-pytestdebug.log
-pip-log.txt
-
-# Temporary audit venv used by Makefile
-.audit-env/
-
-###############################################################################
-# Documentation — MkDocs, Sphinx, etc.
-###############################################################################
-# MkDocs static site output
-site/
-
-# Other doc build outputs
-docs/_build/
-docs/build/
-docs/.cache/
-docs/.benchmarks/
-
-###############################################################################
-# IDE Junk: VSCode, JetBrains, Sublime, etc.
-###############################################################################
-# VS Code
-.vscode/
-!.vscode/settings.json
-!.vscode/extensions.json
-
-# JetBrains
-.idea/
-*.iml
-
-# Sublime
-*.sublime-project
-*.sublime-workspace
-
-# Other editors
-*.swp
-*.swo
-
-###############################################################################
-# OS Junk
-###############################################################################
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon?
-._*
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-###############################################################################
-# Temporary & generated files
-###############################################################################
+# Temporary
 tmp/
 temp/
 *.tmp
@@ -178,33 +131,21 @@ temp/
 *.orig
 *.old
 
-# Editors
-*~
-*.autosave
+# Test
+tests/tmp*/
+tests/output*/
+tests/**/assets*/
+coverage.xml
+htmlcov/
+.coverage*
+.nox/
+.tox/
 
-###############################################################################
-# Local-only configuration files
-###############################################################################
-*.local
-*.override
-*.user
-*.machine
-config.local.*
-settings.local.*
-
-###############################################################################
-# Docker containers, images, volumes
-###############################################################################
-docker/
-docker-compose.override.yml
-
-###############################################################################
-# Git metadata overrides
-###############################################################################
-git-*.sh
-*.diff
-*.patch
-
-# Private Superpowers specs/plans (symlink into Lupaxa cursor-docs vault)
-cursor-docs
-.cursor/
+# Tooling
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.cache/
+pytestdebug.log
+pip-log.txt
+.audit-env/

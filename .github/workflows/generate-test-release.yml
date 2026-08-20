@@ -3,6 +3,9 @@ name: Generate Test Release
 # Makefile mapping: make bump-*-rc → version X.Y.Z-rcN → tag vX.Y.Z-rcN
 # Creates a GitHub prerelease (not a draft) and publishes to TestPyPI.
 # -devN tags do not trigger this workflow (local / in-repo WIP only).
+#
+# TestPyPI Trusted Publishing must run in this workflow file (not a reusable
+# workflow). See https://docs.pypi.org/trusted-publishers/troubleshooting/
 
 on:
   push:
@@ -22,9 +25,32 @@ permissions:
 jobs:
   build-and-publish:
     name: Build and upload to TestPyPI
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-python-package-publisher.yml@master
-    with:
-      repository-url: https://test.pypi.org/legacy/
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Set Up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Install Build Backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install hatch
+
+      - name: Build Distribution
+        run: |
+          hatch build
+
+      # Trusted publishing (OIDC). This repo must be a Trusted Publisher on TestPyPI.
+      - name: Publish to TestPyPI via Trusted Publisher
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          verbose: true
 
   generate-release-notes:
     name: Generate Release Notes

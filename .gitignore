@@ -13,6 +13,7 @@ $RECYCLE.BIN/
 .cursor/
 cursor-docs
 
+
 # Build
 build/
 dist/
@@ -93,6 +94,9 @@ settings.local.*
 *.stackdump
 *.core
 core.*
+
+# Make
+.makefiles/
 
 # Python
 __pycache__/

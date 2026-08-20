@@ -168,16 +168,6 @@ make check-style # lint + format + type
 make check-all   # run tests, coverage, and audit
 ```
 
-<footer>
-    <h1>&nbsp;</h1>
-    <p align="center">
-        <strong>
-            &copy; The Lupaxa Project.
-        </strong>
-        <br />
-        <em>
-            Where exploration meets precision.<br />
-            Where the untamed meets the engineered.
-        </em>
-    </p>
-</footer>
+<a href="https://github.com/the-lupaxa-project">
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/components/footer-for-child-orgs.svg" alt="The Lupaxa Project Footer" width="100%" />
+</a>

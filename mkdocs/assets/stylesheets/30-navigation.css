@@ -32,7 +32,7 @@
   height: 4rem;
   align-items: center;
   justify-content: center;
-  margin: 0 0.5rem 0 -0.25rem;
+  margin: 0 0.75rem 0 -0.25rem;
   padding: 0;
   border-radius: 50%;
 }
@@ -55,7 +55,6 @@
   min-width: 0;
   flex: 1 1 auto;
   align-self: stretch;
-  overflow-x: auto;
   pointer-events: auto;
 }
 
@@ -63,7 +62,7 @@
   display: flex;
   height: 100%;
   align-items: stretch;
-  gap: 0;
+  gap: var(--lupaxa-spacing-xs);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -85,12 +84,11 @@
   display: flex;
   height: 100%;
   align-items: center;
-  padding: 0 0.7rem;
+  padding: 0 1rem;
   color: rgb(255 255 255 / 72%);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.2;
-  white-space: nowrap;
   text-decoration: none;
   background: none;
   border-radius: 0;
@@ -118,9 +116,9 @@
 
 .lupaxa-header__nav-item--active .lupaxa-header__nav-link::after {
   position: absolute;
-  right: 0.7rem;
-  bottom: 1.35rem;
-  left: 0.7rem;
+  right: 1rem;
+  bottom: 1.8rem;
+  left: 1rem;
   height: 2px;
   content: "";
   background-color: var(--lupaxa-light-blue);
@@ -128,7 +126,15 @@
   pointer-events: none;
 }
 
-/* Material controls */
+/* Material controls — GitHub + language picker as one right-hand group */
+
+.lupaxa-header__tools {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-left: auto;
+  pointer-events: auto;
+}
 
 .lupaxa-header__drawer-button {
   display: none;
@@ -138,21 +144,19 @@
 
 /* Repository link (top right) */
 
-.lupaxa-header__inner > .md-header__source {
+.lupaxa-header__tools > .md-header__source {
   position: relative;
   z-index: 3;
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  margin-left: auto;
-  padding-right: 0.25rem;
+  width: auto;
+  max-width: none;
+  padding-right: 0;
   pointer-events: auto;
 }
 
 .md-header__source .md-source {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
   color: rgb(255 255 255 / 85%);
   text-decoration: none;
 }
@@ -163,8 +167,63 @@
 }
 
 .md-header__source .md-source__repository {
-  max-width: 12rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 14rem;
+}
+
+/* Language preference */
+
+.lupaxa-lang-picker {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+.lupaxa-lang-picker__select {
+  color: var(--lupaxa-white);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+  appearance: none;
+  cursor: pointer;
+  background-color: rgb(255 255 255 / 10%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.35rem center;
+  background-size: 0.9rem;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: var(--lupaxa-radius-button);
+  padding: 0.35rem 1.35rem 0.35rem 0.55rem;
+}
+
+.lupaxa-lang-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem;
+  color: var(--lupaxa-white);
+  background-color: color-mix(in srgb, var(--lupaxa-blue) 82%, black);
+}
+
+.lupaxa-lang-fallback[hidden] {
+  display: none;
+}
+
+.lupaxa-lang-fallback__text {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.lupaxa-lang-fallback__dismiss {
+  color: var(--lupaxa-white);
+  font-size: 0.85rem;
+  background: none;
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: var(--lupaxa-radius-pill);
+  padding: 0.15rem 0.7rem;
 }

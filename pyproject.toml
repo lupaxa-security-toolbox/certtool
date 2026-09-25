@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "lupaxa-certtool"
 version = "0.1.6"
 description = "A Python toolkit and CLI for generating self-signed certificates, CSRs, and private keys."
-readme = "README-PYPI.md"
+readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 
@@ -78,7 +78,6 @@ path = "src/lupaxa/certtool/version.py"
 include = [
   "src/**",
   "README.md",
-  "README-PYPI.md",
   "LICENSE",
 ]
 

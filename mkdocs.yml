@@ -58,6 +58,9 @@ use_directory_urls: true
 theme:
   name: material
   custom_dir: overrides
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
   language: en
   logo: assets/images/logo.png
   favicon: assets/images/favicon.png
@@ -96,21 +99,10 @@ hooks:
 
 nav:
   - Home: index.md
-  - Install: installation.md
-  - Usage:
-      - Overview: usage.md
-      - CLI: cli.md
-      - Examples: examples.md
-  - Config: configuration.md
-  - Security: security.md
-  - Reference:
-      - CLI: reference/cli.md
-      - Config files: reference/config.md
-      - Cert generation API: reference/certs.md
-      - Example helpers: reference/example.md
-      - Exceptions: reference/exceptions.md
-      - Utils: reference/utils.md
-      - Versioning: reference/version.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - Reference: reference.md
+  - Examples: examples.md
 
 markdown_extensions:
   - abbr

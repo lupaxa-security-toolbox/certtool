@@ -1,8 +1,10 @@
 <p align="center">
   <a href="https://github.com/lupaxa-security-toolbox">
-    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/security-toolbox/readme-logo.png" alt="Developers Toolbox" />
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/security-toolbox/readme-logo.png" alt="Security Toolbox" />
   </a>
 </p>
+
+<h1 align="center">CertTool</h1>
 
 A clean, modern, fully-typed Python CLI and library for generating **self-signed X.509 certificates**, **certificate signing requests (CSRs)**, and **private keys**.
 
@@ -39,7 +41,7 @@ Built for automation, reproducibility, and bulk-generation workflows used by The
 pip install lupaxa-certtool
 ```
 
-### From source (development mode)
+### From Source (Development Mode)
 
 ```bash
 pip install -e ".[dev]"
@@ -47,7 +49,7 @@ pip install -e ".[dev]"
 
 ## Usage
 
-### Basic self-signed certificate from CLI
+### Basic Self-Signed Certificate from CLI
 
 ```bash
 certtool \
@@ -60,19 +62,19 @@ certtool \
 
 ## Using JSON Configuration
 
-### Generate an example config
+### Generate an Example Config
 
 ```bash
 certtool --generate-example --example-file dev-internal-cert.json
 ```
 
-### Use a JSON config file
+### Use a JSON Config File
 
 ```bash
 certtool --config dev-internal-cert.json
 ```
 
-### Use a directory of configs (bulk mode)
+### Use a Directory of Configs (Bulk Mode)
 
 ```bash
 certtool --config-dir configs/
@@ -112,7 +114,7 @@ Each certificate gets its own folder to prevent overwriting.
 }
 ```
 
-### CLI (overrides JSON)
+### CLI (Overrides JSON)
 
 ```bash
 certtool --config dev-internal-cert.json --passphrase "some-secret"
@@ -123,24 +125,6 @@ certtool --config dev-internal-cert.json --passphrase "some-secret"
 ```bash
 certtool --inspect-cert output/dev.interal/cert.pem
 ```
-
-## Documentation
-
-The project includes MkDocs documentation.
-
-### Online documentation:
-
-[Documentation](https://certtool.thelupaxaproject.org/)
-
-Full documentation is available in the `mkdocs/` directory or served locally:
-
-### Serve docs locally
-
-```bash
-mkdocs serve
-```
-
-Then open the local URL printed by MkDocs in your browser.
 
 ## Development
 
@@ -157,6 +141,18 @@ make test        # run tests
 make type        # type checking (mypy)
 make check-style # lint + format + type
 make check-all   # run tests, coverage, and audit
+```
+
+## Documentation
+
+The published guide is at
+<https://certtool.thelupaxaproject.org/>.
+
+Site Markdown lives in `mkdocs/`.
+
+```bash
+python -m pip install -r requirements.txt
+make mkdocs-serve
 ```
 
 <a href="https://github.com/the-lupaxa-project">

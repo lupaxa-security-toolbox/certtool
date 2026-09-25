@@ -1,4 +1,4 @@
-# Installation
+# Getting Started
 
 ## Requirements
 
@@ -22,10 +22,10 @@ This installs:
 If you're working on the source:
 
 ```bash
-git clone https://github.com/your-org/lupaxa-certtool.git
-cd lupaxa-certtool
+git clone https://github.com/lupaxa-security-toolbox/certtool.git
+cd certtool
 
-# Install with dev extras (ruff, mypy, pytest, bump2version, etc.)
+# Install with dev extras (ruff, mypy, pytest, bump-my-version, etc.)
 pip install -e ".[dev]"
 ```
 

@@ -90,7 +90,7 @@ certs/
     key.pem
 ```
 
-## 4. Programmatic Use from Python
+## Programmatic Use from Python
 
 ```python
 from pathlib import Path
